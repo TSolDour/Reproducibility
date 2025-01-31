@@ -1,0 +1,5 @@
+data_creat<-function(){
+  data<-iris
+  save(data,file="Results/data.Rdata")
+  return(data)
+}

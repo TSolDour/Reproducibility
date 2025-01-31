@@ -1,0 +1,6 @@
+histo_gramme<-function(data){
+  par(mfrow=c(2,2))
+  result<-apply(data[,1:4],2,hist)
+  par(mfrow=c(1,1))
+  return(result)
+}

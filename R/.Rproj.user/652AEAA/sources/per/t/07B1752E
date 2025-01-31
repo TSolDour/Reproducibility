@@ -1,0 +1,24 @@
+{
+    "id": "07B1752E",
+    "path": "~/Rstats/Projects/Reproducibility/Scripts/01_data_creat.R",
+    "project_path": "01_data_creat.R",
+    "type": "r_source",
+    "hash": "43373144",
+    "contents": "",
+    "dirty": false,
+    "created": 1738158884537.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1738158719,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1738158719,
+    "read_only": false,
+    "read_only_alternatives": []
+}

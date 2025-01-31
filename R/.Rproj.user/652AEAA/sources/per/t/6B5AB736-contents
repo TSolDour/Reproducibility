@@ -1,0 +1,24 @@
+################
+# Clean Workspace
+################
+rm(list=ls())
+
+
+###############
+# 00_setup.R
+###############
+source("Scripts/00_setup.R")
+
+
+##############
+# 01_Ingest_Allo.R
+##############
+source("Scripts/01_Ingest_Allo.R")
+
+source("Scripts/02_Tide_Allo.R")
+
+
+##############
+# 02_Stats_Shell_Length.R
+##############
+source("Scripts/02_Stats_Shell_Length.R")

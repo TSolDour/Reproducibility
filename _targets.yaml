@@ -1,0 +1,6 @@
+Example:
+  script: Example_targets.R
+  store: Example_output
+Own:
+  script: Own_targets.R
+  store: _output
