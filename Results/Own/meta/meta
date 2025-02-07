@@ -1,0 +1,10 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+load_gasar|function|fb98f1e2af121f11
+Plot_length|function|37578cdff195a6bf
+AnovaTest_gasar|function|ddfd06a78fc118f9
+Res_gasar|function|f4e8c4755f80e90f
+file|stem|5ee8e75d2fa84526|ce7efd3d66e7893e|2c530c1562a7fbd1|1735323524|Data/Allo.csv|t18013.8304950367s|s10481b|10481|file|local|vector|||0.31||
+data|stem|ae452387d791f744|92ff7ef2e62e665a|84b4a43cb079a0ee|33550471||t20125.6694219967s|s1353b|1353|rds|local|vector|||0.09|27 parsing failures.row col  expected    actual            file 82   6 columns 7 columns DataAllo.csv 83   6 columns 7 columns DataAllo.csv 84   6 columns 7 columns DataAllo.csv 85   6 columns 7 columns DataAllo.csv 86   6 columns 7 columns DataAllo.csv... ... ......... ......... ...............See problems... for more details.|
+Resume|stem|14f4076583c887c4|ff3252caf6720ac4|028ce574877cf2ce|-704557695||t20125.6694228867s|s466b|466|rds|local|vector|||0.05||
+Anova_gasar_Length_Station|stem|fde7d4c6ae8009ab|8831294d53e4ab95|1a0e99d9c485d9d3|1774374912||t20125.6694232842s|s102b|102|rds|local|vector|||0.01|dataStation coerced to factor.|
+Plot|stem|abd29e57456cf2a6|3a898842494740ea|9165184236f3b0e3|1214270943||t20125.6694240897s|s85991b|85991|rds|local|vector|||0.01||
