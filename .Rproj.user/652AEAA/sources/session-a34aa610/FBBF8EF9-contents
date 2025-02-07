@@ -115,7 +115,7 @@ Le partage du projet doit se faire à l'aide d'outils limitant l'intégration ma
 | Pour comprendre comment fonctionne *targets*, rien de tel qu'un exemple concret ! 
 | **A noter qu'il est recommander d'écrire ses scripts sous forme de fonction. Cela permet (i) de limiter le nombre d'objets créés lorsque les scripts tournent et (ii) de simplifier au maximum l'utilisation du script de gestion *targets* **
 
-| Pour cet exemple, nous utiliserons le jeu de données **Allo.csv** (disponible ici : **LIEN**) que nous allons charger à l'aide d'une fonction dédiée:
+| Pour cet exemple, nous utiliserons le jeu de données **Allo.csv** (disponible ici : https://github.com/TSolDour/Reproducibility/tree/master/Data) que nous allons charger à l'aide d'une fonction dédiée:
 ```{r, eval=FALSE, include=TRUE}
 load_gasar <- function(file){
   read_table(file=file, locale = locale(decimal_mark = ",")) %>%
@@ -184,25 +184,26 @@ AnovaTest_gasar <- function(data, a, b){
 use_targets(script = "Own_targets.R")
 ```
 | Cette fonction crée le script suivant que vous avez nommé du nom de votre projet, ici *Own_targets.R*. Ce script est **le tableau de bord de votre workflow**. C'est toujours par lui que vous lancerez votre workflow après avoir édité vos scripts existants ou en avoir créé de nouveaux.
-|   Voyons maintenant comme il fonctionne.
+|
+|   Voyons maintenant comment il fonctionne.
 
 + Avant tout, je vous conseille de **nettoyer l'espace de travail**:
 ```{r eval=FALSE, include=TRUE}
 rm(list=ls())
 ```
 
-+ Il faut ensuite **charger l'ensemble des packages nécessaires à la réalisation du workflow** Dans ce cas, ils sont assez peu nombreux: 
++ Il faut ensuite **charger l'ensemble des packages nécessaires à la réalisation du workflow**. Dans ce cas, ils sont assez peu nombreux: 
 ```{r eval=FALSE, include=TRUE}
 tar_option_set(
   packages = c("readr", "dplyr", "ggplot2", "tibble", "car"))
 ```
 
-+ Il faut maintenant **charger tous les scripts du workflow (dans le bon ordre !). Ici, nous avons regroupé toutes nos fonctions en un seul script ce qui simplifie l'affaire:
++ Il faut maintenant **charger tous les scripts du workflow** (dans le bon ordre !). Ici, nous avons regroupé toutes nos fonctions en un seul script ce qui simplifie l'affaire:
 ```{r eval=FALSE, include=TRUE}
 tar_source("R/FUNCTIONS.R")
 ```
 
-+ C'est ici la partie délicate : vous devez lister de manière exhaustive et sans erreur l'ensemble des fonctions du package et leur output associé. La fonction pour le faire se résume ainsi : *tar_target(OUTPUT, FONCTION)*
++ C'est ici la partie délicate : vous devez lister de manière exhaustive et sans erreur l'ensemble des fonctions du package et leur *output* associé. La fonction pour le faire se résume ainsi : *tar_target(OUTPUT, FONCTION)*
 ```{r eval=FALSE, include=TRUE}
 list(
   tar_target(file, "Data/Allo.csv", format="file"),
@@ -216,12 +217,43 @@ list(
 | Voilà, votre projet est maintenant prêt à être géré par *targets* ! Votre script **projet_targets.R** ne doit rien contenir d'autre que les éléments déjà présents. Vous pourrez évidemment le mettre à jour en ajoutant de nouveaux packages, de nouveaux scripts et de nouvelles *targets* à mesure que vous avancez dans votre projet. 
 
 | Plusieurs fonctions de base que vous devez utiliser dans votre console vous permettent d'interagir avec votre workflow:
+
 ```{r eval=FALSE, include=TRUE}
-Sys.setenv(TAR_PROJECT = "Own") # Pour spécifier à target que vous vous trouvez dans la partie "Own" de votre projet
-tar_manifest(fields = command) # Pour vous assurer qu'il n'y a pas d'erreur dans le listing des targets
+Sys.setenv(TAR_PROJECT = "Own") # Pour spécifier à target que vous vous trouvez dans la partie
+# "Own" de votre projet
+tar_manifest(fields = command) # Pour vous assurer qu'il n'y a pas d'erreur dans
+# le listing des targets
 tar_visnetwork() # Pour visualiser l'architecture du projet
 tar_make() # Pour faire tourner le workflow
-tar_read() # Pour afficher les résults du workflow
+tar_read() # Pour afficher les résultats du workflow
 ```
 
+|   La fonction `tar_visnetwork()` est particulièrement pratique puisqu'elle vous permet d'afficher l'ensemble de votre projet et d'en percevoir ainsi l'architecture, les dépendences entre les objets et leur niveau d'actualisation. 
+|   Dans le cas de cet exemple, la figure produite est la suivante:
+
+![](Results/Own/objects/Own_architecture.jpeg){width=75%}
+
+|    Par ailleurs, la fonction `Sys.setenv()` est à utiliser surtout lorsque votre répertoire de travail contient plusieurs sous projets. L'argument qu'on lui indique renvoie au contenu du fichier *PROJET.yalm* dans lequel sont listés tous les sous projets du répertoire et qui définit les dossiers dans lesquels ranger les *outputs* associés. 
+
+
+# **3. La reproductibilité de l'environnement de travail - le package *renv* **
+
+|   L'intérêt de *renv* pour la gestion et la reproductibilité de vos projets de recherche est triple :
++ (i) *renv* permet d'**isoler** chaque projet en lui fournissant sa propre **librairie de packages**. Ainsi, en installant de nouveaux packages ou en mettant à jour des packages existants dans le cadre d'un projet, vous n'impacterez pas les autres projets utilisant éventuellement les versions antérieures.
++ (ii) *renv* facilite le **transport** des projets entre ordinateurs en automatisant l'installation des packages et de leurs versions dont dépend le projet.
++ (iii) *renv* améliore la **reproductibilité** du projet en assurant l'utilisation constante d'une même librairie de packages quel que soit l'utilisation, l'ordinateur et l'époque d'utilisation. 
+
+|   **Point sémantique :** Le terme "librairie" désigne ici un dossier contenant l'ensemble des *packages* utilisés. Habituellement, avec la fonction `library()`, on charge les packages depuis une **librairie système** partagée par tous les projets R. Avec *renv*, ce sont des librairies spécifiques qui sont créées pour chaque projet.
+
+|   Une fois le package installé grâce à la fonction `install.packages("renv")`, vous pouvez convertir votre projet par la fonction suivante `renv::init()`. Ce-faisant, trois nouvelles entitées sont créées à la racine de votre projet:
++ La **librairie du projet** : *renv/library*. Ici seront stockés tous les packages du projet.
++ Le **fichier verrou** : *renv.lock*. Ce fichier contient toutes les métadonnées nécessaires pour pouvoir réinstaller tous les packages sur n'importe quel nouvel ordinateur.
++ Le **R profile** : *.Rprofile*. Ce fichier est utilisé par *renv* pour configurer chaque nouvelle session de R de sorte qu'il soit possible d'utiliser la librairie du projet.
+
+
+|   Au cours de l'élaboration de votre projet, vous serez très probablement amenés à charger, installer, mettre à jour différents packages. Pour que renv mette correctement à jour le fichier *renv.lock*, il suffit de faire tourner la fonction `renv::snapshot()`.
+|
+|   Enfin, la fonction `renv::restore()` permet, lorsque vous partagez votre projet avec une tierce personne de réinstaller automatiquement l'ensemble de la librairie projet sur son ordinateur à partir des métadonnées de *renv.lock*.
+|
+| Ici sont les trois fonctions `init()`, `snapshot()`, `restore()` qui permettent une utilisation basique du package *renv* pour améliorer la reproductibilité de votre projet. Pour une utilisation avancée, vous trouverez toutes les informations nécessaires ici : https://rstudio.github.io/renv/articles/renv.html.
 
