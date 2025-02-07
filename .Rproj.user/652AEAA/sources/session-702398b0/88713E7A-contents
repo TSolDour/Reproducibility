@@ -2,7 +2,7 @@
 # Follow the comments below to fill in this target script.
 # Then follow the manual to check and run the pipeline:
 #   https://books.ropensci.org/targets/walkthrough.html#inspect-the-pipeline
-rm(list = ls())
+rm(list=ls())
 # Load packages required to define the pipeline:
 library(targets)
 # library(tarchetypes) # Load other packages as needed.
@@ -45,20 +45,19 @@ tar_option_set(
 )
 
 # Run the R scripts in the R/ folder with your custom functions:
-tar_source("R/01_Load_gasar.R")
-tar_source("R/02_Res_gasar.R")
-tar_source("R/03_Plot_length_gasar.R")
-tar_source("R/04_AnovaTest_gasar.R")
+tar_source("R/FUNCTIONS_iris.R")
+# tar_source("other_functions.R") # Source other scripts as needed.
 
 # Replace the target list below with your own:
 list(
-  tar_target(file, "Data/Allo.csv", format="file"),
-  tar_target(data, load_gasar(file)), # rds is the default format. see https://docs.ropensci.org/targets/reference/tar_target.html#storage-formats for other formats
-  tar_target(Resume, Res_gasar(data)),
-  tar_target(Plot, Plot_length(Resume)),
-  tar_target(Anova_gasar_Length_Station, AnovaTest_gasar(data, data$Longueurs, data$Station)))
+  tar_target(Data, data_creat(iris)),
+  tar_target(resume, Res_data(Data)),
+  tar_target(plot, Plot_length(resume)),
+  tar_target(AnovaIris, AnovaTest_iris(Data, Data$Sepal.Length, Data$Species)))
 
-# Sys.setenv(TAR_PROJECT = "Own")
+
+
+# Sys.setenv(TAR_PROJECT = "Reproducibility_iris")
 # tar_manifest(fields = command) # to check for mistakes
 # tar_visnetwork() # to check for the pipeline architecture
 # tar_make() # To run the pipeline

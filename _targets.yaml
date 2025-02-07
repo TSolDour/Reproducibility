@@ -1,6 +1,7 @@
-Example:
-  script: Example_targets.R
-  store: Example_output
 Own:
   script: Own_targets.R
-  store: _output
+  store: Results/Own
+
+Reproducibility_iris:
+  script: Reproducibility_targets.R
+  store: Results/Reproducibility
