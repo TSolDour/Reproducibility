@@ -257,3 +257,10 @@ tar_read() # Pour afficher les résultats du workflow
 |
 | Ici sont les trois fonctions `init()`, `snapshot()`, `restore()` qui permettent une utilisation basique du package *renv* pour améliorer la reproductibilité de votre projet. Pour une utilisation avancée, vous trouverez toutes les informations nécessaires ici : https://rstudio.github.io/renv/articles/renv.html.
 
+# **3. Le suivi du projet - Git et Github **
+
+## **3.1 De quoi parle-t-on ?**
+
+|   **Git** est un système de *contrôle de version*, pensé initialement pour faciliter le *travail collaboratif* pour les développeurs travaillant sur des projets de grande taille et complexes. Ainsi, git permet de gérer l'évolution d'un ensemble de documents au sein d'un projet - **repository**, dans le jargon.
+|
+|   **Attention:** **Git** peut être difficile à appréhender. Ce système est tout sauf intuitif... Il me semble que si vous ne travaillez pas en *mode collaboratif* sur votre projet, il y a d'autres manières plus accessibles d'assurer un suivi de version en local. Autrement dit, selon moi, vous immerger dans l'univers du **Git** n'a de sens que si vous vous destinez à travailler sur un projet avec d'autres collègues qui seront amenés à intervenir sur les scripts, les manuscripts et les autres objets dudit projet (ce devrait être, en fait, le cas de la presque totalité des chercheurs !). Et dans ce cas, ce n'est pas seulement de **Git** dont vous aurez besoin mais de sa version *délocalisée*. Il en existe un certain nombre mais la plus généralement utilisée est **Github**.
