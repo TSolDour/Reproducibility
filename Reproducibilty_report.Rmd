@@ -257,10 +257,42 @@ tar_read() # Pour afficher les résultats du workflow
 |
 | Ici sont les trois fonctions `init()`, `snapshot()`, `restore()` qui permettent une utilisation basique du package *renv* pour améliorer la reproductibilité de votre projet. Pour une utilisation avancée, vous trouverez toutes les informations nécessaires ici : https://rstudio.github.io/renv/articles/renv.html.
 
-# **3. Le suivi du projet - Git et Github **
+# **3. Le suivi du projet - Git et Github**
 
 ## **3.1 De quoi parle-t-on ?**
 
-|   **Git** est un système de *contrôle de version*, pensé initialement pour faciliter le *travail collaboratif* pour les développeurs travaillant sur des projets de grande taille et complexes. Ainsi, git permet de gérer l'évolution d'un ensemble de documents au sein d'un projet - **repository**, dans le jargon.
+|   **Git** est un système de *contrôle de version*, pensé initialement pour faciliter le *travail collaboratif* pour les développeurs travaillant sur des projets de grande taille et complexes. Ainsi, git permet de gérer l'évolution d'un ensemble de documents au sein d'un projet - **repository** dans le jargon.
 |
-|   **Attention:** **Git** peut être difficile à appréhender. Ce système est tout sauf intuitif... Il me semble que si vous ne travaillez pas en *mode collaboratif* sur votre projet, il y a d'autres manières plus accessibles d'assurer un suivi de version en local. Autrement dit, selon moi, vous immerger dans l'univers du **Git** n'a de sens que si vous vous destinez à travailler sur un projet avec d'autres collègues qui seront amenés à intervenir sur les scripts, les manuscripts et les autres objets dudit projet (ce devrait être, en fait, le cas de la presque totalité des chercheurs !). Et dans ce cas, ce n'est pas seulement de **Git** dont vous aurez besoin mais de sa version *délocalisée*. Il en existe un certain nombre mais la plus généralement utilisée est **Github**.
+|   **Attention:** **Git** peut être difficile à appréhender. Ce système est tout sauf intuitif... Si vous ne travaillez pas en *mode collaboratif* sur votre projet, il y a d'autres manières plus accessibles d'assurer un suivi de version en local. Autrement dit, vous immerger dans l'univers du **Git** n'a de sens que si vous vous destinez à travailler sur un projet avec d'autres collègues qui seront amenés à intervenir sur les scripts, les manuscripts et les autres objets dudit projet (ce qui est, en fait, le cas de la presque totalité des chercheurs !). Et dans ce cas, ce n'est pas seulement de **Git** dont vous aurez besoin mais de sa version *délocalisée*. Il en existe un certain nombre mais la plus généralement utilisée est **Github**.
+|
+|   Dans cette partie, vous allez apprendre à **utiliser Rstudio et contrôle de version à l'aide de Git et Github**. Il faut pour cela avoir installé R et Rstudio sur votre ordinateur, ainsi qu'avoir créé un compte gratuit sur [**Github**](https://github.com/). 
+
+## **3.2 Installation de Git**
+
+|   Il y a différentes procédures d'installation de Git mais toutes ne se valent pas.
++   Sur une machine **windows**, il est recommandé de suivre cette [**procédure**](https://gitforwindows.org/), qui installe automatiquement le **Git bash** ainsi qu'un ensemble d'autres outils nécessaires. Par ailleurs, cette procédure place le fichier executable dans un dossier conventionnel qui en facilite l'utilisation par Rstudio.
++   Sur une marchine **MacOS**, la meilleure façon de faire et d'aller directement dans le shell et de taper ces deux commandes :
+
+```{r eval=FALSE, include=TRUE}
+git --version
+git config
+```
+|
+|   Un *pop-up* devrait alors proposer une installation, qu'il faut accepter !
+
+## **3.3 Utilisation basique de Git**
+
+|   Avant de passer par R, il est important de se familiariser avec les commandes de base de Git. Pour cela, il faut ouvrir l'application **Git bash**, accessible depuis le menu "Rechercher" de votre ordinateur.
+|   Une fois ouverte, cette application n'est rien d'autre qu'un **shell**, une interface utilisateur permettant de recevoir des commandes émises en langage informatique et de les transmettre à un **programme**, ici Git. Et comme son nom l'indique, ce shell comprend préférentiellement le langage **Bash**. Une liste assez complète des commandes bash élémentaires est disponible [**ici**](https://www.unixmaniax.fr/wiki/index.php?title=Bash_-_les_commandes).
+|
+|   Voici à quoi ressemble votre interface :
+|   ![](Image3.jpg)
+|
+|   A partir de là, il est possible de naviguer dans votre machine grâce à la fonction `cd`. Par exemple, je peux me rendre dans mon projet *Reproducibility*:
+|   ![](Image4.jpg)
+|
+|   Une fois positionné dans votre projet vous pouvez en afficher le contenu grâce à la fonction `ls -l` :
+|   ![](Image5.jpg)
+|
+|   Vous n'en n'aurez pas l'utilité ici mais quelques autres fonctions bash utiles sont :
++   `touch ` :
