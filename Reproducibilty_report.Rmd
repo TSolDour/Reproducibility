@@ -283,16 +283,69 @@ git config
 ## **3.3 Utilisation basique de Git**
 
 |   Avant de passer par R, il est important de se familiariser avec les commandes de base de Git. Pour cela, il faut ouvrir l'application **Git bash**, accessible depuis le menu "Rechercher" de votre ordinateur.
-|   Une fois ouverte, cette application n'est rien d'autre qu'un **shell**, une interface utilisateur permettant de recevoir des commandes émises en langage informatique et de les transmettre à un **programme**, ici Git. Et comme son nom l'indique, ce shell comprend préférentiellement le langage **Bash**. Une liste assez complète des commandes bash élémentaires est disponible [**ici**](https://www.unixmaniax.fr/wiki/index.php?title=Bash_-_les_commandes).
+|   Une fois ouverte, cette application n'est rien d'autre qu'un **shell**, une interface utilisateur permettant de recevoir des commandes émises en langage informatique et de les transmettre à un **programme**, ici Git. Et comme son nom l'indique, ce shell comprend préférentiellement le langage **bash**. Une liste assez complète des commandes bash élémentaires est disponible [**ici**](https://www.unixmaniax.fr/wiki/index.php?title=Bash_-_les_commandes).
 |
-|   Voici à quoi ressemble votre interface :
+|   Voici à quoi ressemble votre interface, le dollar symbolise le début de votre ligne de commande :
 |   ![](Image3.jpg)
 |
-|   A partir de là, il est possible de naviguer dans votre machine grâce à la fonction `cd`. Par exemple, je peux me rendre dans mon projet *Reproducibility*:
-|   ![](Image4.jpg)
+|   A partir de là, il est possible de naviguer dans votre machine et de réaliser un ensemble d'actions basiques :
+
+```{bash eval=FALSE, include=TRUE}
+cd PATH           # Naviguer jusqu'à un répertoire choisi; 
+ls -l             # Afficher le contenu du répertoire;
+touch NAME        # Créer un nouveau fichier;
+rm NAME           # Effacer un fichier;   
+mkdir NAME        # Créer un nouveau dossier;
+rm -r NAME        # Effacer un dossier
+```
 |
-|   Une fois positionné dans votre projet vous pouvez en afficher le contenu grâce à la fonction `ls -l` :
-|   ![](Image5.jpg)
+|   Une fois que vous maîtrisez ces quelques fonctions, il est temps de **programmer** votre Git !
+|   Avec Git, la synthaxe est toujours la même `Git COMMANDE --ARGUMENT`, pour la configuration nous utiliserons `git config`:
+
+```{bash eval=FALSE, include=TRUE}
+git config --global user.name "votre nom"
+git config --global user.email "votre email"
+git config --global core.editor "emacs" #Ou tout autre éditeur de votre choix
+git config --global init.defaultBranch "master" #Nom de la branche principale de vos projets
+```
 |
-|   Vous n'en n'aurez pas l'utilité ici mais quelques autres fonctions bash utiles sont :
-+   `touch ` :
+|   De nombreuses autres options de configuration sont disponibles que vous devrez découvrir par vous-même. Ici sont les principales options pour bien commencer. Pour voir l'ensemble de vos options :
+```{bash eval=FALSE, include=TRUE}
+git config --global --list
+```
+
+## **3.4 Connecter Git et Github**
+|
+|   Maintenant que Git vous connaît, il faut lui présenter votre Github ! Là encore plusieurs façons de faire existe, c'est la plus simple qui vous est présentée ici.
+|
+|   Il faut d'abord générer un **PAT** (*Personal Access Token*). Le PAT est une sorte de mot de passe qui atteste de notre appartenance au Git et définit ce que nous pouvons ou pas faire.
+|   Deux manières de générer un **PAT**:
++   Directement *via* Github, une fois connectés, cliquez sur *settings>Developer settings>Personal access tokens>Generate new token*
++   Sur Rstudio, installez le package *usethis* et utilisez la fonction `usethis::create_github_token()`. Cela ouvre un *pop-up* vous permettant de **(i) décrire** le PAT (à quoi est-il destiné), **(ii) définir une date d'expiration** (recommandé par Github) et **(iii) définir le scope** du PAT. Une fois ces paramètres renseignés, cliquez sur *Generate token*.
+|
+|   **AVANT DE FERMER LA FENÊTRE** assurez-vous de **copier** correctement le **PAT** car une fois la fenêtre fermée vous ne pourrez plus y avoir accès ! Un bon moyen de **copier le PAT** dans un endroit sûr facilement accessible pour Rstudio, git et Github est d'utiliser la fonction `usethis::gitcreds_set()`. R vous demandera alors de renseigner votre PAT pour le stocker en lieu sûr:
+```{r eval=FALSE, include=TRUE}
+gitcreds::gitcreds_set()
+
+? Enter password or token: ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+-> Adding new credentials...
+-> Removing credentials from cache...
+-> Done.
+```
+|
+| C'est bon, vous avez vos papiers, vous pouvez vous connecter à Github !
++   Dans Github, cliquez sur le gros bouton vert *new* à côté de **repositories**. Remplissez les champs nécessaires et laissez les paramètres par défaut. De préférence, donnez à votre repository le même nom que le projet local que vous voulez mettre en partage sur Github, par exemple le projet *Reproducibility*, puis cliquez sur *Create repository*.
++   Cliquez ensuite sur le bouton *<> Code* et copiez l'**URL HTTPS**
++   Dans le Git bash, placez-vous dans le dossier *Reproducibility* qui contient l'ensemble du R_project avec son gestionnaire *targets* et sa librairie propre *renv, ainsi que les scripts, données et résultats du projet.
++   Faites tourner la fonction suivante avec l'URL HTTPS que vous avez copié :
+```{bash, eval=FALSE, include=TRUE}
+git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
+```
++   Votre Github repository est maintenant connecté à votre projet local mais il est vide. Pour transférer l'ensemble de votre projet sur le *repository* github :
+```{bash, eval=FALSE, include=TRUE}
+git push --set-upstream origin master
+```
+
+  En rafraichissant la page de Github, vous devriez voir apparaître l'ensemble de votre projet.
+  
+## **3.5 Connecter Rstudio à Git et Github**
