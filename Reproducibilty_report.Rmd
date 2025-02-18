@@ -346,8 +346,12 @@ git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
 git push --set-upstream origin master
 ```
 
-|   En rafraichissant la page de Github, vous devriez voir apparaître l'ensemble de votre projet.
+|   En rafraichissant la page de Github, vous devriez voir apparaître l'ensemble de votre projet. Il faut dorénavant considérer que la **localisation première** (la seule qui doit être systématiquement à jour) de votre projet n'est plus votre ordinateur mais votre **repository Github**. L'ordinateur n'est plus qu'un moyen d'agir sur les composants de votre projet.
 
 |   **Remarque :** Avec `Git clone URL HTTPS` vous pouvez faire l'inverse, à savoir importer un *repository* depuis Github vers votre propre ordinateur.
+
+## **3.5 Les actions de routine**
+
+|   Vous vous devez maintenant de connaître l'architecture de base de Git et Github ainsi que les fonctions associées à certaines actions pour commencer à utiliser cet outil correctement.
   
 ## **3.5 Connecter Rstudio à Git et Github**
