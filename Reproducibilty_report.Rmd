@@ -350,8 +350,9 @@ git push --set-upstream origin master
 
 |   **Remarque :** Avec `Git clone URL HTTPS` vous pouvez faire l'inverse, à savoir importer un *repository* depuis Github vers votre propre ordinateur.
 
-## **3.5 Les actions de routine**
+## **3.5 Exemple d'utilisation en routine**
 
-|   Vous vous devez maintenant de connaître l'architecture de base de Git et Github ainsi que les fonctions associées à certaines actions pour commencer à utiliser cet outil correctement.
+|   Vous vous devez maintenant de connaître l'architecture de base de Git et Github ainsi que les fonctions associées à certaines actions pour commencer à utiliser cet outil correctement. Une routine d'utilisation basique de Git et Github est synthétisée dans le schéma suivant:
+
   
 ## **3.5 Connecter Rstudio à Git et Github**
