@@ -280,7 +280,7 @@ git config
 |
 |   Un *pop-up* devrait alors proposer une installation, qu'il faut accepter !
 
-## **3.3 Utilisation basique de Git**
+## **3.3 Configuration de Git**
 
 |   Avant de passer par R, il est important de se familiariser avec les commandes de base de Git. Pour cela, il faut ouvrir l'application **Git bash**, accessible depuis le menu "Rechercher" de votre ordinateur.
 |   Une fois ouverte, cette application n'est rien d'autre qu'un **shell**, une interface utilisateur permettant de recevoir des commandes émises en langage informatique et de les transmettre à un **programme**, ici Git. Et comme son nom l'indique, ce shell comprend préférentiellement le langage **bash**. Une liste assez complète des commandes bash élémentaires est disponible [**ici**](https://www.unixmaniax.fr/wiki/index.php?title=Bash_-_les_commandes).
@@ -324,6 +324,7 @@ git config --global --list
 +   Sur Rstudio, installez le package *usethis* et utilisez la fonction `usethis::create_github_token()`. Cela ouvre un *pop-up* vous permettant de **(i) décrire** le PAT (à quoi est-il destiné), **(ii) définir une date d'expiration** (recommandé par Github) et **(iii) définir le scope** du PAT. Une fois ces paramètres renseignés, cliquez sur *Generate token*.
 |
 |   **AVANT DE FERMER LA FENÊTRE** assurez-vous de **copier** correctement le **PAT** car une fois la fenêtre fermée vous ne pourrez plus y avoir accès ! Un bon moyen de **copier le PAT** dans un endroit sûr facilement accessible pour Rstudio, git et Github est d'utiliser la fonction `usethis::gitcreds_set()`. R vous demandera alors de renseigner votre PAT pour le stocker en lieu sûr:
+
 ```{r eval=FALSE, include=TRUE}
 gitcreds::gitcreds_set()
 
@@ -332,8 +333,10 @@ gitcreds::gitcreds_set()
 -> Removing credentials from cache...
 -> Done.
 ```
-|
-| C'est bon, vous avez vos papiers, vous pouvez vous connecter à Github !
+
+|   **Remarque :** Puisque la validité d'un PAT est temporaire, il vous faudra recommencer cette procédure régulièrement. Ce n'est pas forcément pratique mais c'est une question de sécurité !
+
+|   C'est bon, vous avez vos papiers, vous pouvez vous connecter à Github !
 +   Dans Github, cliquez sur le gros bouton vert *new* à côté de **repositories**. Remplissez les champs nécessaires et laissez les paramètres par défaut. De préférence, donnez à votre repository le même nom que le projet local que vous voulez mettre en partage sur Github, par exemple le projet *Reproducibility*, puis cliquez sur *Create repository*.
 +   Cliquez ensuite sur le bouton *<> Code* et copiez l'**URL HTTPS**
 +   Dans le Git bash, placez-vous dans le dossier *Reproducibility* qui contient l'ensemble du R_project avec son gestionnaire *targets* et sa librairie propre *renv, ainsi que les scripts, données et résultats du projet.
@@ -381,3 +384,15 @@ git push --set-upstream origin master
 |   Dans le second cas, vous pouvez envoyer directement votre *working_branch* vers Github avec la même fonction `git push`. En actualisant la page de github, vous verrez alors apparaître cette nouvelle branche qui pourra être consultée, modifiée ou fusionnée à la branche principale à tout moment. 
   
 ## **3.5 Connecter Rstudio à Git et Github**
+
+|   Pour les utilisateurs réguliers de Rstudio, il est possible de simplifier l'utilisation de Git et Github depuis votre IDE (et de s'affranchir un peu du shell Git bash). Il faut pour cela connecter Rstudio à Git et à Github !
+
+|   Il y a des prérequis à la réalisation de cette connexion, que vous devez valider sans problème si vous avez suivi ce document dans l'ordre :
++   Avoir un compte Github ;
++   Avoir installé une version récente de R et Rstudio ;
++   Etre initié au fonctionnement de Git ;
++   Avoir une connexion fonctionnelle entre votre git (local) et votre compte Github.
+
+|   Si vous n'avez pas redémarré RStudio depuis l'installation de Git, faites-le.
+
+|   Il faut maintenant s'assurer que Rstudio localise correctement l'executable Git. Si vous avez installé Git en suivant les instructions de la **section 3.2**, cela doit fonctionner automatiquement. Pour vous en assurer en cliquant sur *Tools > Global options... > Git/SVN*. Dans ce menu, vérifiez que le chemin d'accès vers l'executable Git est correcte. Ensuite, cochez la case *"Enable version control interface for Rstudio projects"* et cliquez sur *Apply* en bas de la fenêtre. Redémarrez Rstudio.
