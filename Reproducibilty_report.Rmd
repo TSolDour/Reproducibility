@@ -352,7 +352,32 @@ git push --set-upstream origin master
 
 ## **3.5 Exemple d'utilisation en routine**
 
-|   Vous vous devez maintenant de connaître l'architecture de base de Git et Github ainsi que les fonctions associées à certaines actions pour commencer à utiliser cet outil correctement. Une routine d'utilisation basique de Git et Github est synthétisée dans le schéma suivant:
+|   Vous vous devez maintenant de connaître l'architecture de base de Git et Github ainsi que les fonctions associées à certaines actions pour commencer à utiliser cet outil correctement. Une routine d'utilisation basique de Git et Github est synthétisée dans le schéma suivant :
+![](Image6.jpg){width=75%}
 
+
+|   En considérant toujours que **la dernière version de votre projet se trouve sur Github**, il faut, au début de votre journée de travail, vous rendre en local à la racine du répertoire de votre projet *via* le **git bash** : `cd PATH`. Une fois localisé au bon endroit, utilisez la commande `git pull` de manière à rapatrier la dernière version du projet sur votre machine. Ce faisant, vous avez maintenant votre projet *up-to-date* dans la branche *master* de votre git.
+
+|   Pour travailler serainement sur le projet, je vous conseille de créer immédiatement une branche parallèle en local, sur laquelle vous ferez toutes vos modifications avant de les réintégrer à la branche principale. Il est consillé de toujours donner des **noms explicites** aux différentes branches que vous créerez ! Ici, par exemple : `git branch working_branch`. Une fois votre branche créée, il faut vous placer sur celle-ci à l'aide de la fonction `git checkout working_branch`.
+
+|   La branche sur laquelle vous vous trouvez est indiquée à la fin du chemin d'accès de votre localisation.
+
+![](Image7.jpg){width=75%}
+
+|   A ce stade, vous vous trouvez sur une branche parallèle (*working_branch*) qui contient la même version du projet que la branche principale (*master*). Vous pouvez commencer à travailler !
+
+|   Par exemple, vous pouvez créer - si ce n'est pas déjà fait - le fichier README.txt à la racine de votre projet, ou le modifier s'il existe déjà. Cette modification n'existe que dans votre *working_branch* mais elle n'est pas encore prise en compte par Git. Il faut pour cela faire deux choses :
++   Signifier à Git de prendre en compte la création ou la modification du fichier : `git add NomDuFicier` ou bien `git add --all` dans le cas où plusieurs actions sont à prendre en compte en même temps (création d'un fichier, modification d'un autre, etc.) ;
++   Dire à Git de capturer ces modifications. On parle alors de **commit** qui est une sorte de capture d'écran, d'enregistrement de l'état actuel du projet. Un commit requiert un commentaire de sorte qu'il vous sera ultérieurement possible de savoir explicitement à quel ajout/modification du projet correspond chaque commit. La fonction est la suivante : `git commit -m "Votre message"`. 
+
+|   **Remerque :** Si vous êtes un peu perdus, vous pouvez demander à Git le status des différents objets du projet : sont-ils tous pris en compte ? combien d'actions doivent être *commitées* ? Il suffit de taper : `git status`.
+
+|   Ainsi, après chaque commit, c'est une nouvelle version du projet qui est enregistrée sur votre branche. Ce n'est pas la peine de *commiter* à chaque modification apportée. Il est conseillé de le faire à des moments stratégiques, lorsqu'une modification significative a été apportée au projet : la rédaction d'un nouveau script, l'ajout de nouvelles données, la production d'un nouveau résultat... En réalisant plusieurs commits au cours de votre journée de travail, le projet se modifie en conservant la trace de chaque étape clé : les versions du projet, qui fonctionnent comme les cailloux laissés derrière lui par le Petit Poucet. C'est là tout l'intérêt du *versionning*, en cas de problème, d'erreur ou d'impasse, il vous est possible de revenir à la version précédente en un claquement de doigt : `git reset HEAD^` !
+
+|   A la fin de votre session de travail, le moment est venu de renvoyer la dernière version de votre projet vers Github pour qu'elle soit accessible par chacun et partout. Au moins deux possibilités s'offrent à vous : (i) Vous êtes satisfaits du travail accompli, vous être sûr de vos modifications et personne d'autre que vous ne doit les valider ou (ii) Vous devez rendre vos modifications accessibles à un collègue avant de les intégrer pleinement au projet.
+
+|   Dans le premier cas, il vous faut réintégrer la dernière version de votre projet sur votre branche principale en local. Pour cela, rendez-vous sur votre branche *master* : `git checkout master`, puis fusionnez le contenu de votre branche parallèle à la branche principale : `git merge working_branch`. Ca y est, la branche *master* contient la dernière version de votre projet, que vous pouvez renvoyer sur la *master* de Github par la fonction `git push`.
+
+|   Dans le second cas, vous pouvez envoyer directement votre *working_branch* vers Github avec la même fonction `git push`. En actualisant la page de github, vous verrez alors apparaître cette nouvelle branche qui pourra être consultée, modifiée ou fusionnée à la branche principale à tout moment. 
   
 ## **3.5 Connecter Rstudio à Git et Github**
