@@ -3,6 +3,7 @@ title: "Reproductibilité"
 author: "Tsoldour"
 date: "`r Sys.Date()`"
 output: pdf_document
+toc: TRUE
 ---
 
 <style>
@@ -51,9 +52,10 @@ Le partage du projet doit se faire à l'aide d'outils limitant l'intégration ma
 |   L'architecture du projet doit répondre aux normes du **Research compendium**. Ce dernier est un ensemble de règles simples à suivre pour organiser de manière **standardisée** et efficace l'ensemble numérique de votre projet de recherche. En adoptant cette convention, nimporte quelle personne familière du **Research compendium** sera en mesure d'appréhender rapidement le projet, de l'élargir, de le diffuser, de le reproduire. Le **Research compendium** constitue ainsi l'architecture de base d'un projet reproductible !
 |
 ## **1.1 La structure fondamentale**
-|
+
 |   L'ensemble des éléments numériques d'un projet de recherche doivent être contenus dans un unique répertoire de travail, ici *Reproducibility*. Ils doivent en revanche être clairement séparés au sein du répertoire de travail.
-|
+
+
 ![](image1.jpg){width=50%}
 
 
@@ -67,12 +69,12 @@ Le partage du projet doit se faire à l'aide d'outils limitant l'intégration ma
 
 |   Ce dossier contient les **scripts du projet**. Ces scripts contiennent les actions réalisées sur les données. Il est préférable de se limiter à des scripts courts correspondant à des actions bien précises (nettoyage, analyse statistique, représentation graphique). Il est important que chaque script soit facilement compréhensible par chacun. Pour cela, il est pertinent de nommer le script avec le nom de la fonction qu'il contient et de les numéroter par ordre d'utilisation. On visualise ainsi facilement l'ensemble du workflow.
 
-| 
+ 
 ![](image2.jpg){width=20%}
 
 
 |   Pour en faciliter encore la compréhension, il est aussi conseillé d'attribuer un en-tête standardisé à chaque script. Il n'y a pas de norme établi, il faut simplement que cet en-tête permette de comprendre rapidement à quel projet appartient le script, quel est son rôle au sein du projet et, éventuellement, de contacter son auteur.
-|
+
 ```{r, echo=TRUE}
 ############################
 # NOM_DU_PROJET
@@ -86,7 +88,7 @@ Le partage du projet doit se faire à l'aide d'outils limitant l'intégration ma
 + **Results**
 
 |   Ce dossier contient l'ensemble des résultats : données néttoyées, graphiques, résultats statistiques, etc. Les résultats doivent *a minima* porter le nom du script les ayant produits. Si plusieurs résultats sont émis pour un même script, ils doivent alors être rangées dans des dossiers portant le nom de leur script parent.
-|    Contrairement au dossier **Data** dont le contenu est sacré, et au dossier **R** qui doit faire l'objet d'un suivi particulier, le contenu de **_output** n'a aucune valeur dans la mesure où il peut être produit à l'identique et *ad libitum*. Il ne faut donc pas avoir peur de manipuler ses résultats, les effacer, les déplacer, etc.
+|   Contrairement au dossier **Data** dont le contenu est sacré, et au dossier **R** qui doit faire l'objet d'un suivi particulier, le contenu de **_output** n'a aucune valeur dans la mesure où il peut être produit à l'identique et *ad libitum*. Il ne faut donc pas avoir peur de manipuler ses résultats, les effacer, les déplacer, etc.
 
 
 + **R_project**
@@ -112,10 +114,11 @@ Le partage du projet doit se faire à l'aide d'outils limitant l'intégration ma
 # **2. La mise en oeuvre du projet - le package *targets* **
 
 |   *targets* est un package servant à la gestion de **workflow**. Il sera votre allié idéal pour organiser votre projet, de le faire évoluer, mais aussi d'avoir un oeil sur **l'architecture du projet** - très pratique lorsque le projet contient de multiples jeux de données, de nombreux scripts et énormément de résultats et que ces derniers sont en plus inter-dépendants ! - et de visualiser le degré d'actualisation de vos différents objets.
-| Pour comprendre comment fonctionne *targets*, rien de tel qu'un exemple concret ! 
-| **A noter qu'il est recommander d'écrire ses scripts sous forme de fonction. Cela permet (i) de limiter le nombre d'objets créés lorsque les scripts tournent et (ii) de simplifier au maximum l'utilisation du script de gestion *targets* **
+|   Pour comprendre comment fonctionne *targets*, rien de tel qu'un exemple concret !
 
-| Pour cet exemple, nous utiliserons le jeu de données **Allo.csv** (disponible ici : https://github.com/TSolDour/Reproducibility/tree/master/Data) que nous allons charger à l'aide d'une fonction dédiée:
+|   **A noter qu'il est recommandé d'écrire ses scripts sous forme de fonction. Cela permet (i) de limiter le nombre d'objets créés lorsque les scripts tournent et (ii) de simplifier au maximum l'utilisation du script de gestion *targets* **
+
+|   Pour cet exemple, nous utiliserons le jeu de données **Allo.csv** (disponible ici : https://github.com/TSolDour/Reproducibility/tree/master/Data) que nous allons charger à l'aide d'une fonction dédiée:
 ```{r, eval=FALSE, include=TRUE}
 load_gasar <- function(file){
   read_table(file=file, locale = locale(decimal_mark = ",")) %>%
@@ -257,9 +260,9 @@ tar_read() # Pour afficher les résultats du workflow
 |
 | Ici sont les trois fonctions `init()`, `snapshot()`, `restore()` qui permettent une utilisation basique du package *renv* pour améliorer la reproductibilité de votre projet. Pour une utilisation avancée, vous trouverez toutes les informations nécessaires ici : https://rstudio.github.io/renv/articles/renv.html.
 
-# **3. Le suivi du projet - Git et Github**
+# **4. Le suivi du projet - Git et Github**
 
-## **3.1 De quoi parle-t-on ?**
+## **4.1 De quoi parle-t-on ?**
 
 |   **Git** est un système de *contrôle de version*, pensé initialement pour faciliter le *travail collaboratif* pour les développeurs travaillant sur des projets de grande taille et complexes. Ainsi, git permet de gérer l'évolution d'un ensemble de documents au sein d'un projet - **repository** dans le jargon.
 |
@@ -267,7 +270,7 @@ tar_read() # Pour afficher les résultats du workflow
 |
 |   Dans cette partie, vous allez apprendre à **utiliser Rstudio et contrôle de version à l'aide de Git et Github**. Il faut pour cela avoir installé R et Rstudio sur votre ordinateur, ainsi qu'avoir créé un compte gratuit sur [**Github**](https://github.com/). 
 
-## **3.2 Installation de Git**
+## **4.2 Installation de Git**
 
 |   Il y a différentes procédures d'installation de Git mais toutes ne se valent pas.
 +   Sur une machine **windows**, il est recommandé de suivre cette [**procédure**](https://gitforwindows.org/), qui installe automatiquement le **Git bash** ainsi qu'un ensemble d'autres outils nécessaires. Par ailleurs, cette procédure place le fichier executable dans un dossier conventionnel qui en facilite l'utilisation par Rstudio.
@@ -280,7 +283,7 @@ git config
 |
 |   Un *pop-up* devrait alors proposer une installation, qu'il faut accepter !
 
-## **3.3 Configuration de Git**
+## **4.3 Configuration de Git**
 
 |   Avant de passer par R, il est important de se familiariser avec les commandes de base de Git. Pour cela, il faut ouvrir l'application **Git bash**, accessible depuis le menu "Rechercher" de votre ordinateur.
 |   Une fois ouverte, cette application n'est rien d'autre qu'un **shell**, une interface utilisateur permettant de recevoir des commandes émises en langage informatique et de les transmettre à un **programme**, ici Git. Et comme son nom l'indique, ce shell comprend préférentiellement le langage **bash**. Une liste assez complète des commandes bash élémentaires est disponible [**ici**](https://www.unixmaniax.fr/wiki/index.php?title=Bash_-_les_commandes).
@@ -314,7 +317,7 @@ git config --global init.defaultBranch "master" #Nom de la branche principale de
 git config --global --list
 ```
 
-## **3.4 Connecter Git et Github**
+## **4.4 Connecter Git et Github**
 |
 |   Maintenant que Git vous connaît, il faut lui présenter votre Github ! Là encore plusieurs façons de faire existe, c'est la plus simple qui vous est présentée ici.
 |
@@ -353,7 +356,7 @@ git push --set-upstream origin master
 
 |   **Remarque :** Avec `Git clone URL HTTPS` vous pouvez faire l'inverse, à savoir importer un *repository* depuis Github vers votre propre ordinateur.
 
-## **3.5 Exemple d'utilisation en routine**
+## **4.5 Exemple d'utilisation en routine**
 
 |   Vous vous devez maintenant de connaître l'architecture de base de Git et Github ainsi que les fonctions associées à certaines actions pour commencer à utiliser cet outil correctement. Une routine d'utilisation basique de Git et Github est synthétisée dans le schéma suivant :
 ![](Image6.jpg){width=75%}
@@ -375,15 +378,24 @@ git push --set-upstream origin master
 
 |   **Remerque :** Si vous êtes un peu perdus, vous pouvez demander à Git le status des différents objets du projet : sont-ils tous pris en compte ? combien d'actions doivent être *commitées* ? Il suffit de taper : `git status`.
 
-|   Ainsi, après chaque commit, c'est une nouvelle version du projet qui est enregistrée sur votre branche. Ce n'est pas la peine de *commiter* à chaque modification apportée. Il est conseillé de le faire à des moments stratégiques, lorsqu'une modification significative a été apportée au projet : la rédaction d'un nouveau script, l'ajout de nouvelles données, la production d'un nouveau résultat... En réalisant plusieurs commits au cours de votre journée de travail, le projet se modifie en conservant la trace de chaque étape clé : les versions du projet, qui fonctionnent comme les cailloux laissés derrière lui par le Petit Poucet. C'est là tout l'intérêt du *versionning*, en cas de problème, d'erreur ou d'impasse, il vous est possible de revenir à la version précédente en un claquement de doigt : `git reset HEAD^` !
+|   Ainsi, après chaque commit, c'est une nouvelle version du projet qui est enregistrée sur votre branche. Ce n'est pas la peine de *commiter* à chaque modification apportée. Il est conseillé de le faire à des moments stratégiques, lorsqu'une modification significative a été apportée au projet : la rédaction d'un nouveau script, l'ajout de nouvelles données, la production d'un nouveau résultat... En réalisant plusieurs commits au cours de votre journée de travail, le projet se modifie en conservant la trace de chaque étape clé : les versions du projet, qui fonctionnent comme les cailloux laissés derrière lui par le Petit Poucet. C'est là tout l'intérêt du *versionning*, en cas de problème, d'erreur ou d'impasse, il vous est possible de revenir au commit en un claquement de doigt : `git reset HEAD^` !
 
 |   A la fin de votre session de travail, le moment est venu de renvoyer la dernière version de votre projet vers Github pour qu'elle soit accessible par chacun et partout. Au moins deux possibilités s'offrent à vous : (i) Vous êtes satisfaits du travail accompli, vous être sûr de vos modifications et personne d'autre que vous ne doit les valider ou (ii) Vous devez rendre vos modifications accessibles à un collègue avant de les intégrer pleinement au projet.
 
 |   Dans le premier cas, il vous faut réintégrer la dernière version de votre projet sur votre branche principale en local. Pour cela, rendez-vous sur votre branche *master* : `git checkout master`, puis fusionnez le contenu de votre branche parallèle à la branche principale : `git merge working_branch`. Ca y est, la branche *master* contient la dernière version de votre projet, que vous pouvez renvoyer sur la *master* de Github par la fonction `git push`.
 
 |   Dans le second cas, vous pouvez envoyer directement votre *working_branch* vers Github avec la même fonction `git push`. En actualisant la page de github, vous verrez alors apparaître cette nouvelle branche qui pourra être consultée, modifiée ou fusionnée à la branche principale à tout moment. 
-  
-## **3.5 Connecter Rstudio à Git et Github**
+
+|   **Remarque:** Grâce aux commits, vous pouvez vous déplacer à tout moment dans l'historique de votre projet ! En utilisant la fonction `git log`, vous accédez à l'historique de vos commits :
+
+![](Image9.jpg){width=75%}
+
+|   Chaque commit est désigné par un numéro d'identification - le **hash** -, **l'auteur**, **la date de création** et **le message** que vous avez rédigé au moment du commit. Vous pouvez ainsi retrouver chaque version de votre projet et y retourner si besoin, **sans modifier ni supprimer les versions ultérieures** ! Cela grâce à la fonction `git checkout <HashDuCommit>`. Une fois dans le commit choisi, vous pouvez visionner l'état correspondant de votre projet, y faire des modifications et même créer une nouvelle branche à partir de ce commit pour entamer un travail parallèle à votre projet actuel, qu'il sera possible de fusionner par la suite.
+
+|   Pour créer une branche à partir d'un commit précédent : `git switch -c <NewBranch>`.
+
+
+## **4.5 Connecter Rstudio à Git et Github**
 
 |   Pour les utilisateurs réguliers de Rstudio, il est possible de simplifier l'utilisation de Git et Github depuis votre IDE (et de s'affranchir un peu du shell Git bash). Il faut pour cela connecter Rstudio à Git et à Github !
 
@@ -395,4 +407,9 @@ git push --set-upstream origin master
 
 |   Si vous n'avez pas redémarré RStudio depuis l'installation de Git, faites-le.
 
-|   Il faut maintenant s'assurer que Rstudio localise correctement l'executable Git. Si vous avez installé Git en suivant les instructions de la **section 3.2**, cela doit fonctionner automatiquement. Pour vous en assurer en cliquant sur *Tools > Global options... > Git/SVN*. Dans ce menu, vérifiez que le chemin d'accès vers l'executable Git est correcte. Ensuite, cochez la case *"Enable version control interface for Rstudio projects"* et cliquez sur *Apply* en bas de la fenêtre. Redémarrez Rstudio.
+|   Il faut maintenant s'assurer que Rstudio localise correctement l'executable Git. Si vous avez installé Git en suivant les instructions de la **section 4.2**, cela doit fonctionner automatiquement.
+|   Pour vous en assurer en cliquant sur *Tools > Global options... > Git/SVN*. Dans ce menu, vérifiez que le chemin d'accès vers l'executable Git est correcte. Ensuite, cochez la case *"Enable version control interface for Rstudio projects"* et cliquez sur *Apply* en bas de la fenêtre. Redémarrez Rstudio et ouvrez le projet *Reproducibility* qui fait déjà l'objet d'un suivi de version Git.
+|   Vous devriez voir dans le panel en haut à droite un bouton *Git* vous permettant de **suivre les modifications** apportées au projet, de réaliser les **commits**, les **push/pull**, de créer de **nouvelles branches** et de naviguer entre elles !
+![](Image8.jpg){width=50%}
+
+|   L'utilisation en interface clic-bouton de git *via* Rstudio ne sera pas décrite dans ce document. Un bon tutoriel est disponible [ici](https://thinkr.fr/travailler-avec-git-via-rstudio-et-versionner-son-code/#Realiser_un_backup).
