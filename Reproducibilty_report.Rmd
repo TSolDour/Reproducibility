@@ -59,7 +59,7 @@ Le partage du projet doit se faire à l'aide d'outils limitant l'intégration ma
 |   L'ensemble des éléments numériques d'un projet de recherche doivent être contenus dans un unique répertoire de travail, ici *Reproducibility*. Ils doivent en revanche être clairement séparés au sein du répertoire de travail.
 
 
-![](image1.jpg){width=50%}
+![](Images/image1.jpg){width=50%}
 
 
 |   Les éléments minimums devant être présents dans le répertoire de travail de votre projet sont:
@@ -73,7 +73,7 @@ Le partage du projet doit se faire à l'aide d'outils limitant l'intégration ma
 |   Ce dossier contient les **scripts du projet**. Ces scripts contiennent les actions réalisées sur les données. Il est préférable de se limiter à des scripts courts correspondant à des actions bien précises (nettoyage, analyse statistique, représentation graphique). Il est important que chaque script soit facilement compréhensible par chacun. Pour cela, il est pertinent de nommer le script avec le nom de la fonction qu'il contient et de les numéroter par ordre d'utilisation. On visualise ainsi facilement l'ensemble du workflow.
 
  
-![](image2.jpg){width=20%}
+![](Images/image2.jpg){width=20%}
 
 
 |   Pour en faciliter encore la compréhension, il est aussi conseillé d'attribuer un en-tête standardisé à chaque script. Il n'y a pas de norme établie, il faut simplement que cet en-tête permette de comprendre rapidement à quel projet appartient le script, quel est son rôle au sein du projet et, éventuellement, de contacter son auteur.
@@ -307,7 +307,7 @@ git config
 
 |   Voici à quoi ressemble votre interface, le dollar symbolise le début de votre ligne de commande :
 
-|   ![](Image3.jpg)
+|   ![](Images/Image3.jpg)
 
 |   A partir de là, il est possible de naviguer dans votre machine et de réaliser un ensemble d'actions basiques :
 
@@ -395,7 +395,7 @@ git push --set-upstream origin master
 ## **4.5 Exemple d'utilisation en routine**
 
 |   Vous vous devez maintenant de connaître l'architecture de base de Git et Github ainsi que les fonctions associées à certaines actions pour commencer à utiliser cet outil correctement. Une routine d'utilisation basique de Git et Github est synthétisée dans le schéma suivant :
-![](Image6.jpg){width=75%}
+![](Images/Image6.jpg){width=75%}
 
 
 |   En considérant toujours que **la dernière version de votre projet se trouve sur Github**, il faut, au début de votre journée de travail, vous rendre en local à la racine du répertoire de votre projet *via* le **git bash** : `cd PATH`. Une fois localisé au bon endroit, utilisez la commande `git pull` de manière à rapatrier la dernière version du projet sur votre machine. Ce faisant, vous avez maintenant votre projet *up-to-date* dans la branche *master* de votre git.
@@ -404,7 +404,7 @@ git push --set-upstream origin master
 
 |   La branche sur laquelle vous vous trouvez est indiquée à la fin du chemin d'accès de votre localisation.
 
-![](Image7.jpg){width=75%}
+![](Images/Image7.jpg){width=75%}
 
 |   A ce stade, vous vous trouvez sur une branche parallèle (*working_branch*) qui contient la même version du projet que la branche principale (*master*). Vous pouvez commencer à travailler !
 
@@ -424,7 +424,7 @@ git push --set-upstream origin master
 
 |   **Remarque:** Grâce aux commits, vous pouvez vous déplacer à tout moment dans l'historique de votre projet ! En utilisant la fonction `git log`, vous accédez à l'historique de vos commits :
 
-![](Image9.jpg){width=75%}
+![](Images/Image9.jpg){width=75%}
 
 |   Chaque commit est désigné par un numéro d'identification - le **hash** -, **l'auteur**, **la date de création** et **le message** que vous avez rédigé au moment du commit. Vous pouvez ainsi retrouver chaque version de votre projet et y retourner si besoin, **sans modifier ni supprimer les versions ultérieures** ! Cela grâce à la fonction `git checkout <HashDuCommit>`. Une fois dans le commit choisi, vous pouvez visionner l'état correspondant de votre projet, y faire des modifications et même créer une nouvelle branche à partir de ce commit pour entamer un travail parallèle à votre projet actuel, qu'il sera possible de fusionner par la suite.
 
@@ -447,6 +447,6 @@ git push --set-upstream origin master
 |   Il faut maintenant s'assurer que Rstudio localise correctement l'executable Git. Si vous avez installé Git en suivant les instructions de la **section 4.2**, cela doit fonctionner automatiquement.
 |   Pour vous en assurer en cliquant sur *Tools > Global options... > Git/SVN*. Dans ce menu, vérifiez que le chemin d'accès vers l'executable Git est correcte. Ensuite, cochez la case *"Enable version control interface for Rstudio projects"* et cliquez sur *Apply* en bas de la fenêtre. Redémarrez Rstudio et ouvrez le projet *Reproducibility* qui fait déjà l'objet d'un suivi de version Git.
 |   Vous devriez voir dans le panel en haut à droite un bouton *Git* vous permettant de **suivre les modifications** apportées au projet, de réaliser les **commits**, les **push/pull**, de créer de **nouvelles branches** et de naviguer entre elles !
-![](Image8.jpg){width=50%}
+![](Images/Image8.jpg){width=50%}
 
 |   L'utilisation en interface clic-bouton de git *via* Rstudio ne sera pas décrite dans ce document. Un bon tutoriel est disponible [**ici**](https://thinkr.fr/travailler-avec-git-via-rstudio-et-versionner-son-code/#Realiser_un_backup).
