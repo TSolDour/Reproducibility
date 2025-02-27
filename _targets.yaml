@@ -2,6 +2,3 @@ Own:
   script: Own_targets.R
   store: Results/Own
 
-Reproducibility_iris:
-  script: Reproducibility_targets.R
-  store: Results/Reproducibility
