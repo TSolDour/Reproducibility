@@ -12,7 +12,7 @@ AnovaTest_gasar <- function(data, a, b){
   Obj <- aov(a ~ b, data=data)
   Shap <-  shapiro.test(Obj$residuals)
   if(Shap["p.value"] > 0.05){
-    Lev <- leveneTest(Obj$residuals, data$Station)
+    Lev <- leveneTest(Obj$residuals, data$b)
   } else(return("No residual normality"))
   if(Lev["group","Pr(>F)"] > 0.05){
     Res <- anova(Obj)
