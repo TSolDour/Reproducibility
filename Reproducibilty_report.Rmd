@@ -11,6 +11,7 @@ body {
 text-align : justify}
 header {
 text-align : center}
+\newpage
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -450,3 +451,67 @@ git push --set-upstream origin master
 ![](Images/Image8.jpg){width=50%}
 
 |   L'utilisation en interface clic-bouton de git *via* Rstudio ne sera pas décrite dans ce document. Un bon tutoriel est disponible [**ici**](https://thinkr.fr/travailler-avec-git-via-rstudio-et-versionner-son-code/#Realiser_un_backup).
+
+
+# **5. Rendre compte de son travail**
+
+## **5.1 Introduction au Rmarkdown**
+
+|   Seul le partage écrit du projet sera ici abordé : articles, rapports, livres, etc.
+
+|   Le commun des mortels utilise pour s'exprimer éléctroniquement pas écrit des logiciels tels que **Word**, **OpenOffice**, **LibreOffice**, etc. Ces logiciels de traitement de texte sont dits **WYSIWYG** : “What You See Is What You Get”. L'avantage principal de ces logiciels est leur interface clic-bouton qui les rend généralement très intuitifs. Néanmoins, dès qu'il s'agit de programmer des documents un petit peu complexes présentant des mises en page spécifiques, intégrant des images, des tableaux, voire même du code, les logiciels **WYSIWYG** deviennent très laborieux. 
+
+|   Heureusement, une alternative existe ! Ce sont les logiciels **WYSIWYM** : “What You See Is What You Mean”. Ces logiciels se basent sur un **langage balisé** permettant de complètement détacher le fond de la forme. Certains langages balisés son connus, comme **LateX** ou **HTML**. Le principe est simple : en intégrant *dans le texte* des balises signifiant une mise en forme particulière, l'opérateur ne se contente que du fond. La mise en forme est faite automatiquement par des compilateurs.
+
+|   Le **WYSIWYM** utilisé avec R est **Rmarkdown**, une version adaptée du **Markdown** originel développé pour fournir un langage balisé d'une grande simplicité.
+|   Les documents Rmarkdown sont dynamiques, c'est-à-dire qu'ils intègrent à la fois du texte (transmettre un message) et du code (réaliser des analyses et des figures).
+
+## **5.2 Structure d'un document Rmarkdown**
+
+|   Un document Rmarkdown est composé de trois éléments principaux : 
+
+![](Images/Image10.jpg){width=75%}
+
++ **L'en-tête** :
+
+Il se situe au début du document et est délimité par 3 tirets (---) :
+```{r, include=TRUE, eval=FALSE}
+---
+title: "Reproductibilité"
+author: "Tsoldour"
+date: "`r Sys.Date()`"
+output: pdf_document
+toc: TRUE
+---
+```
+L'en-tête contient par défaut les **métadonnées** du document : titre, auteur, date et output. Il est possible de renseigner de nombreuses autres informations pour **personnaliser le style** de votre document. Par exemple ici `toc: TRUE` active l'insertion d'une table des matières en début de document.
+
++ **Le corps du document** :
+
+Le corps du document est simplement le texte que vous allez pouvoir rédiger et personnaliser grâce à l'utilisation des **balises**.
+
+
+![](Images/Image11.jpg){width=75%}
+
+Vous pouvez par exemple écrire en *italique* ou en **gras**.
+
+Il est aussi possible de faire des listes à puce :
+
++ première puce ;
+
++ deuxième puce ;
+
++ troisième puce
+
+Ou même d'insérer du code dans le texte : `usethis::create_github_token()`
+
++ **Le code actif** :
+
+|  C'est là tout l'intérêt de Rmarkdown : il est possible d'insérer des **chunks**, qui sont des espaces de code R pouvant être utilisés pour réaliser des analyses et produire des figures directement dans le document. 
+
+-------------------------------------------------------------------
+
+|   Pour en savoir (beaucoup) plus sur le fonctionnement et l'utilisation de Rmarkdown, rendez-vous sur le [**markdown guide**](https://www.markdownguide.org/) et sur le [**Rmarkdown guide**](https://bookdown.org/yihui/rmarkdown/).
+
+-------------------------------------------------------------------
+
