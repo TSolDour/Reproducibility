@@ -4,6 +4,7 @@ author: "Tsoldour"
 date: "`r Sys.Date()`"
 output: pdf_document
 toc: TRUE
+
 ---
 
 <style>
@@ -347,7 +348,7 @@ git config --global --list
 +   Directement *via* Github, une fois connectés, cliquez sur *settings>Developer settings>Personal access tokens>Generate new token*
 +   Sur Rstudio, installez le package *usethis* et utilisez la fonction `usethis::create_github_token()`. Cela ouvre un *pop-up* vous permettant de **(i) décrire** le PAT (à quoi est-il destiné), **(ii) définir une date d'expiration** (recommandé par Github) et **(iii) définir le scope** du PAT. Une fois ces paramètres renseignés, cliquez sur *Generate token*.
 
-|   **AVANT DE FERMER LA FENÊTRE** assurez-vous de **copier** correctement le **PAT** car une fois la fenêtre fermée vous ne pourrez plus y avoir accès ! Un bon moyen de **copier le PAT** dans un endroit sûr, facilement accessible pour Rstudio, Git et Github est d'utiliser la fonction `usethis::gitcreds_set()`. R vous demandera alors de renseigner votre PAT pour le stocker en lieu sûr:
+|   **AVANT DE FERMER LA FENÊTRE** assurez-vous de **copier** correctement le **PAT** car une fois la fenêtre fermée vous ne pourrez plus y avoir accès ! Un bon moyen de **copier le PAT** dans un endroit sûr, facilement accessible pour Rstudio, Git et Github est d'utiliser la fonction `gitcreds::gitcreds_set()`. R vous demandera alors de renseigner votre PAT pour le stocker en lieu sûr:
 
 ```{r eval=FALSE, include=TRUE}
 gitcreds::gitcreds_set()
