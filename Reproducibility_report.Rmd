@@ -247,7 +247,7 @@ tar_read() # Pour afficher les résultats du workflow
 
 |   Dans le cas de cet exemple, la figure produite est la suivante:
 
-![](Results/Own/objects/Own_architecture.jpeg){width=75%}
+![](Images/visnetwork.png)
 
 |    Par ailleurs, la fonction `Sys.setenv()` est à utiliser surtout lorsque votre répertoire de travail contient plusieurs sous projets. L'argument qu'on lui indique renvoie au contenu du fichier _*PROJECT.yalm* dans lequel sont listés tous les sous projets du répertoire et qui définit les dossiers dans lesquels ranger les *outputs* associés. 
 
@@ -515,4 +515,240 @@ Ou même d'insérer du code dans le texte : `usethis::create_github_token()`
 |   Pour en savoir (beaucoup) plus sur le fonctionnement et l'utilisation de Rmarkdown, rendez-vous sur le [**markdown guide**](https://www.markdownguide.org/) et sur le [**Rmarkdown guide**](https://bookdown.org/yihui/rmarkdown/).
 
 -------------------------------------------------------------------
+
+# **6. La reproductibilité: un moyen de se faire aider !**
+
+| Produire des analyses et des scripts facilement reproductibles est aussi le meilleur moyen de trouver de l'aide quand on en a besoin. Qu'il s'agisse d'interroger un collègue, un professeur ou même une intelligence artificielle, la probabilité d'obtenir une réponse satisfaisante est bien plus élevée quand on est en mesure de fournir un bout de code et des données facilement utilisables et interprétables, on parle de "reprex" (REPRoducile EXemple).
+
+| Les bases d'un bon reprex sont peu nombreuses mais doivent être prises au sérieux: 
+
++ Le code et les données fournis doivent être les plus courts possible. N'envoyez pas l'intégralité de votre script, seulement la partie qui pose problème ! De la même manière, un jeu de données réduit au minimum est souvent suffisant pour rendre compte de sa structure.
+
++ Le code doit fonctionner et votre erreur doit être reproductible avec ce code. Cela passe par inclure l'ensemble des appels aux packages nécessaires (`library()`) et les objets utilisés.
+
++ Le code doit être facile à lire.
+
++ Le code doit être facilement copiable et exécutable.
+
+En R, trois outils existent pour garantir tout cela: *styler*, *datapasta* et *reprex*.
+
+## **6.1 *styler* pour une mise en forme parfaite **
+
+| *styler* est un package R qui formate automatiquement votre script selon les standards "officiels". Il faut commencer par l'installer depuis le Cran : `install.packages("styler")`. Ensuite, redémarrez votre session R.
+
+| Une fois installé, vous pouvez utiliser *styler* via l'addin RStudio comme montré dans l'image ci-dessous :
+
+![](Images/StylerAddin.png)
+
+ou via 3 fonctions principales :
+
++ `style_pkg()` : qui permet de reformater des fichiers .R, .Rprofile, .Rmd, etc.
+
++ `style_file()` : qui permet de reformater tout type de fichier spécifié.
+
++ `style_text()` : qui permet de reformater un texte fourni sous forme de vecteur.
+
+| Le plus simple reste quand même d'utiliser l'addin. Par exemple, en utilisant l'addin `style selection` après avoir sélectionné ce code :
+
+```{r, eval=FALSE, include=TRUE }
+a<-c(1:10 )
+b <- rep(c("A","B"), by= 5)
+data <-data.frame(a , b)%>%
+mutate(c= ifelse(b="A", "avocat","banane"))
+```
+
+on obtient :
+
+```{r, eval=FALSE, include=TRUE }
+a <- c(1:10)
+b <- rep(c("A", "B"), by = 5)
+data <- data.frame(a, b) %>%
+  mutate(c = ifelse(b = "A", "avocat", "banane"))
+```
+
+| Un script parfaitement formaté, joli et beaucoup plus clair. *styler* ne révolutionnera pas vos compétences en code et ne corrigera pas vos erreurs. Simplement, un formattage standard simplifie grandement la lecture de ceux qui viendront mettre leur nez dans vos scripts !
+
+## **6.2 *tribble* pour présenter vos données**
+
+| Un code propre ne sert pas à grand chose sans données, et la majorité des blocages se posent dans le cas particulier d'un jeu de données particulier. Il faut donc être en mesure de fournir **dans son code** un échantillon du jeu de données permettant de bien reproduire l'ensemble des actions codées dans le script. Cela se fait facilement avec *datapasta*, package R que vous pouvez installer selon la procédure classique: `install.packages("datapasta")`.
+
+|  *datapasta* vous permet de coder la structure et le contenu d'un jeu de données directement depuis Excel via un simple copier/coller. Une fois le package installé et la session redémarrée, vous trouverez un addin dédié au package :
+
+![](Images/datapastaAddin.png)
+
+| Pour que le destinataire de votre demande puisse accéder facilement à un exemple simple et clair de vos données sans avoir à envoyer un fichier supplémentaire, il vous suffit :
+
++ d'ouvrir vos données dans un tableur et de les copier dans votre presse-papier :
+
+![](Images/tableurSelection.png)
+
++ dans R, cliquer sur l'addin *"paste as tribble"*, ou utilisez la fonction `datapasta::tribble_paste()` et le code repoduisant exactement vos données s'insère automatiquement dans votre script :
+
+```{r, eval=FALSE, include=TRUE}
+
+datapasta::tribble_paste()
+df <- tibble::tribble(
+    ~Station,            ~Espece, ~Lot, ~Longueurs,       ~PSI,           ~IC,
+  "Missirah", "Crassotrea_gasar",   1L,         65,   "0,9993", "0,153738462",
+  "Missirah", "Crassotrea_gasar",   1L,         52,   "0,9993", "0,192173077",
+  "Missirah", "Crassotrea_gasar",   1L,         55,   "0,9993", "0,181690909",
+  "Missirah", "Crassotrea_gasar",   1L,         59,   "0,9993", "0,169372881",
+  "Missirah", "Crassotrea_gasar",   2L,         71,   "1,1401", "0,160577465",
+  "Missirah", "Crassotrea_gasar",   2L,         69,   "1,1401", "0,165231884",
+  "Missirah", "Crassotrea_gasar",   2L,          5,   "1,1401",     "0,22802",
+  "Missirah", "Crassotrea_gasar",   2L,         49,   "1,1401", "0,232673469",
+  "Missirah", "Crassotrea_gasar",   3L,         64, "0,954525", "0,149144531",
+  "Missirah", "Crassotrea_gasar",   3L,         61, "0,954525", "0,156479508",
+  "Missirah", "Crassotrea_gasar",   3L,         67, "0,954525", "0,142466418",
+  "Missirah", "Crassotrea_gasar",   3L,         58, "0,954525", "0,164573276",
+  "Missirah",  "Anadara_senilis",   1L,         33,  "0,53494",  "0,16210303",
+  "Missirah",  "Anadara_senilis",   1L,         35,  "0,53494",     "0,15284",
+  "Missirah",  "Anadara_senilis",   1L,         33,  "0,53494",  "0,16210303",
+  "Missirah",  "Anadara_senilis",   1L,          3,  "0,53494", "0,178313333",
+  "Missirah",  "Anadara_senilis",   1L,         33,  "0,53494",  "0,16210303",
+  "Missirah",  "Anadara_senilis",   2L,         37,  "0,47298", "0,127832432",
+  "Missirah",  "Anadara_senilis",   2L,         28,  "0,47298", "0,168921429",
+  "Missirah",  "Anadara_senilis",   2L,         32,  "0,47298",  "0,14780625",
+  "Missirah",  "Anadara_senilis",   2L,         32,  "0,47298",  "0,14780625",
+  "Missirah",  "Anadara_senilis",   2L,         34,  "0,47298", "0,139111765"
+  )
+
+```
+
+| Dans le cas où vos données seraient déjà dans R sous la forme d'un dataframe, vous pouvez tout aussi bien les coder au format tribble avec la fonction `datapasta::dpasta(df)`.
+
+| En combinant *styler* et *datapasta*, vous êtes maintenant en mesure de produire un script correctement mis en page et reproduisant exactement les données que vous souhaitez partager en exemple. Il faut maintenant exporter ce script dans un format qui soit facile à lire et à exécuter depuis un forum type GitHub ou StackOverflow de manière à pouvoir être récupéré et utilisé sans problème. 
+
+## **6.3 *reprex* : exporter un script complètement reproductible**
+
+| Le package *reprex* fait le job. Une fois que vous avez votre code tout beau et fonctionnel, par exemple :
+
+```{r, eval=FALSE, include=TRUE}
+
+# Reprex example
+library(tibble)
+library(dplyr)
+library(ggplot2)
+
+# Raw data example
+df <- tibble::tribble(
+  ~Station, ~Espece, ~Lot, ~Longueurs, ~PSI, ~IC,
+  "Missirah", "Crassotrea_gasar", 1L, 65, "0,9993", "0,153738462",
+  "Missirah", "Crassotrea_gasar", 1L, 52, "0,9993", "0,192173077",
+  "Missirah", "Crassotrea_gasar", 1L, 55, "0,9993", "0,181690909",
+  "Missirah", "Crassotrea_gasar", 1L, 59, "0,9993", "0,169372881",
+  "Missirah", "Crassotrea_gasar", 2L, 71, "1,1401", "0,160577465",
+  "Missirah", "Crassotrea_gasar", 2L, 69, "1,1401", "0,165231884",
+  "Missirah", "Crassotrea_gasar", 2L, 5, "1,1401", "0,22802",
+  "Missirah", "Crassotrea_gasar", 2L, 49, "1,1401", "0,232673469",
+  "Missirah", "Crassotrea_gasar", 3L, 64, "0,954525", "0,149144531",
+  "Missirah", "Crassotrea_gasar", 3L, 61, "0,954525", "0,156479508",
+  "Missirah", "Crassotrea_gasar", 3L, 67, "0,954525", "0,142466418",
+  "Missirah", "Crassotrea_gasar", 3L, 58, "0,954525", "0,164573276",
+  "Missirah", "Anadara_senilis", 1L, 33, "0,53494", "0,16210303",
+  "Missirah", "Anadara_senilis", 1L, 35, "0,53494", "0,15284",
+  "Missirah", "Anadara_senilis", 1L, 33, "0,53494", "0,16210303",
+  "Missirah", "Anadara_senilis", 1L, 3, "0,53494", "0,178313333",
+  "Missirah", "Anadara_senilis", 1L, 33, "0,53494", "0,16210303",
+  "Missirah", "Anadara_senilis", 2L, 37, "0,47298", "0,127832432",
+  "Missirah", "Anadara_senilis", 2L, 28, "0,47298", "0,168921429",
+  "Missirah", "Anadara_senilis", 2L, 32, "0,47298", "0,14780625",
+  "Missirah", "Anadara_senilis", 2L, 32, "0,47298", "0,14780625",
+  "Missirah", "Anadara_senilis", 2L, 34, "0,47298", "0,139111765"
+)
+
+# Tidying data
+df_OK <- df %>%
+  select(Espece, Lot, Longueurs, IC) %>%
+  mutate(Sampler = ifelse(Lot == 1L, "Xavier",
+                          ifelse(Lot == 2L, "Romain",
+                                 ifelse(Lot == 3L, "Bertrand", "NA")
+                          )
+  ))
+
+
+# Ploting length
+df_OK %>%
+  ggplot(aes(x = Espece, y = Longueurs, fill = Sampler)) +
+  geom_boxplot() +
+  theme_bw()
+
+```
+
+| Je n'ai plus qu'à copier le code dans mon presse-papier et à appeler la fonction `reprex()`dans la console. Le Viewer Rstudio affiche alors le rendu et votre presse-papier contient le code à coller dans votre message (sur GitHub, StackOverflow ou même un mail à votre maître de stage).
+
+| Regardez dans ce cas où j'ai intégré un graphique, la ligne `![](https://i.imgur.com/i9Yj4sP.png)<!-- -->` qu'il ne faut surtout modifier, permet de le visualiser sans faire tourner le code.
+
+
+```{r, eval=FALSE, include=TRUE}
+
+# Reprex example
+library(tibble)
+library(dplyr)
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
+library(ggplot2)
+
+# Raw data example
+df <- tibble::tribble(
+  ~Station, ~Espece, ~Lot, ~Longueurs, ~PSI, ~IC,
+  "Missirah", "Crassotrea_gasar", 1L, 65, "0,9993", "0,153738462",
+  "Missirah", "Crassotrea_gasar", 1L, 52, "0,9993", "0,192173077",
+  "Missirah", "Crassotrea_gasar", 1L, 55, "0,9993", "0,181690909",
+  "Missirah", "Crassotrea_gasar", 1L, 59, "0,9993", "0,169372881",
+  "Missirah", "Crassotrea_gasar", 2L, 71, "1,1401", "0,160577465",
+  "Missirah", "Crassotrea_gasar", 2L, 69, "1,1401", "0,165231884",
+  "Missirah", "Crassotrea_gasar", 2L, 5, "1,1401", "0,22802",
+  "Missirah", "Crassotrea_gasar", 2L, 49, "1,1401", "0,232673469",
+  "Missirah", "Crassotrea_gasar", 3L, 64, "0,954525", "0,149144531",
+  "Missirah", "Crassotrea_gasar", 3L, 61, "0,954525", "0,156479508",
+  "Missirah", "Crassotrea_gasar", 3L, 67, "0,954525", "0,142466418",
+  "Missirah", "Crassotrea_gasar", 3L, 58, "0,954525", "0,164573276",
+  "Missirah", "Anadara_senilis", 1L, 33, "0,53494", "0,16210303",
+  "Missirah", "Anadara_senilis", 1L, 35, "0,53494", "0,15284",
+  "Missirah", "Anadara_senilis", 1L, 33, "0,53494", "0,16210303",
+  "Missirah", "Anadara_senilis", 1L, 3, "0,53494", "0,178313333",
+  "Missirah", "Anadara_senilis", 1L, 33, "0,53494", "0,16210303",
+  "Missirah", "Anadara_senilis", 2L, 37, "0,47298", "0,127832432",
+  "Missirah", "Anadara_senilis", 2L, 28, "0,47298", "0,168921429",
+  "Missirah", "Anadara_senilis", 2L, 32, "0,47298", "0,14780625",
+  "Missirah", "Anadara_senilis", 2L, 32, "0,47298", "0,14780625",
+  "Missirah", "Anadara_senilis", 2L, 34, "0,47298", "0,139111765"
+)
+
+# Tidying data
+df_OK <- df %>%
+  select(Espece, Lot, Longueurs, IC) %>%
+  mutate(Sampler = ifelse(Lot == 1L, "Xavier",
+                          ifelse(Lot == 2L, "Romain",
+                                 ifelse(Lot == 3L, "Bertrand", "NA")
+                          )
+  ))
+
+
+# Ploting length
+df_OK %>%
+  ggplot(aes(x = Espece, y = Longueurs, fill = Sampler)) +
+  geom_boxplot() +
+  theme_bw()
+
+
+![](https://i.imgur.com/i9Yj4sP.png)<!-- -->
+
+<sup>Created on 2025-10-23 with [reprex v2.1.1](https://reprex.tidyverse.org)</sup>
+```
+
+
+|  Pour aller plus loin avec la fonction `reprex()`, il y a maintenant deux petits arguments à connaître :
+
++ `venue = c("gh", "so", "ds", "r", "rtf", "html")` en fonction de la destination de votre exemple. Dans l'ordre, les valeurs de venue correspondent à GitHub, stackOverflow, communauté Rstudio, sortie "R-friendly", Rich-Text Format, document HTML.
+
++ `si = FALSE` pâr défaut, mais si vous spécifier `TRUE`, alors vos informations de session, notamment les versions de packages sont fournies dans le reprex, ce qui peut être nécessaire dans certains cas où le problème viendrait de là.
+
 
