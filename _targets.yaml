@@ -1,4 +1,4 @@
-Own:
-  script: Own_targets.R
-  store: Results/Own
+Reproducibility:
+  script: Reproducibility_targets.R
+  store: Results
 

@@ -5,14 +5,11 @@
 # Contact : t.soldourdin@gmail.com
 ####################################
 
-AnovaTest_gasar <- function(data, a, b){
-  library(tibble)
-  library(dplyr)
-  library(car)
+AnovaTest <- function(data, a, b){
   Obj <- aov(a ~ b, data=data)
   Shap <-  shapiro.test(Obj$residuals)
   if(Shap["p.value"] > 0.05){
-    Lev <- leveneTest(Obj$residuals, data$b)
+    Lev <- leveneTest(Obj$residuals, b)
   } else(return("No residual normality"))
   if(Lev["group","Pr(>F)"] > 0.05){
     Res <- anova(Obj)
@@ -21,6 +18,7 @@ AnovaTest_gasar <- function(data, a, b){
     Post <- TukeyHSD(Obj)
     return(list(data.frame(Post$b) %>%
                   rownames_to_column(var="b") %>%
-                  filter(p.adj<0.05),Res["b", "Pr(>F)"]))
+                  filter(p.adj<0.05),
+                p_value = as.numeric(Res["b", "Pr(>F)"])))
   } else (return("null"))
 }

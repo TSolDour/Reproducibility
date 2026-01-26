@@ -1,0 +1,80 @@
+---
+title: "Example of a Quarto Article"
+author: "Thomas Sol Dourdin^1,2^, Jean-Baptiste Ledoux^2^"
+format:
+  docx:
+    reference-doc: mystyles.docx
+    df_print: "paged"
+    number_sections: true
+    fig_caption: true
+bibliography: library.bib
+csl: ieee.csl
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1. Littoral Environnement et Sociétés (LIENSs), UMR 7266 CNRS – La Rochelle Université, 2 rue Olympe de Gouges, 17000 La Rochelle, France.
+2. CIIMAR/CIMAR LA, Centro Interdisciplinar de Investigação Marinha e Ambiental, Universidade do Porto, Terminal de Cruzeiros do Porto de Leixões, 4450-208 Matosinhos, Portugal.
+
+<br>
+
+# Introduction
+
+|  Cephalopods are becoming promising model systems in ecotoxicology, for biomonitoring [@Ajala2022] as well as experimental studies [@Penicaud2017;@Garca-Flores2025]. They are also a meal loved by Iberian people: Portuguese and Spanish. For instance, one of the best way to cook octopus is the *pulpo a la gallega*.
+
+<br>
+
+# Materials and Methods
+
+## Description of the biological material
+
+| The best octopuses are found directly on the dock of the fishing harbours. Ask to fishers if they cought some, but do it kindly because they are sensible guys.
+
+<br>
+
+## Cooking recipe
+
+| Too long to details it here, sorry... Instead, focus on bivalves from Sine Saloum.
+
+<br>
+
+# Results
+
+
+| The length of individuals found in different stations are displayed in the Figure 1.
+
+```{r, Figure1, fig.cap="Figure 1: What a beautiful plot!", echo=FALSE, warning=FALSE, message=FALSE, dpi=500, fig.width=6, fig.height=4, out.height="7in", out.width="8in"}
+library(targets)
+tar_read(Plot)
+```
+
+<br>
+
+| But, it is also noteworthy that the total number of samples is `r nrow(tar_read(data))`.
+
+| Moreover, if we want, we can use the packages *flextable* and *ftExtra* to include the data (first 10 rows) as a beautiful table:
+
+```{r, Table1, echo=FALSE, warning=FALSE, message=FALSE}
+library(knitr)
+library(flextable)
+library(ftExtra)
+library(dplyr)
+
+table1 <- data.frame(tar_read(data))
+table <- table1[1:10,]
+
+flextable(table) %>%
+  theme_vanilla() %>%
+  padding(padding=2) %>%
+  fontsize(size=8, part = "header") %>%
+  fontsize(size=8, part="body") %>%
+  align(align="left", part="all") %>%
+  set_table_properties(layout = "autofit", width=1) %>%
+  set_caption("Table 1: Sequencing statistics for newly hatched juveniles. GeT-PlaGe sample code is used for the labelling of reads in the European Nucleotide Archive repository. R1 GC% and R2 GC% are percent GC content on the forward and reverse reads, respectively.")
+```
+
+\newpage
+# References

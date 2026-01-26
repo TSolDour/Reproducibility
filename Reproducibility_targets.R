@@ -5,7 +5,8 @@
 rm(list = ls())
 # Load packages required to define the pipeline:
 library(targets)
-# library(tarchetypes) # Load other packages as needed.
+library(tarchetypes)
+library(visNetwork) # Load other packages as needed.
 
 # Set target options:
 tar_option_set(
@@ -56,9 +57,10 @@ list(
   tar_target(data, load_gasar(file)), # rds is the default format. see https://docs.ropensci.org/targets/reference/tar_target.html#storage-formats for other formats
   tar_target(Resume, Res_gasar(data)),
   tar_target(Plot, Plot_length(Resume)),
-  tar_target(Anova_gasar_Length_Station, AnovaTest_gasar(data, data$Longueurs, data$Station)))
+  tar_target(Anova_gasar_Length_Station, AnovaTest(data, data$Longueurs, data$Station)),
+  tar_quarto(Article, path='Report/Article/Article.qmd', quiet=FALSE))
 
-# Sys.setenv(TAR_PROJECT = "Own")
+# Sys.setenv(TAR_PROJECT = "Reproducibility")
 # tar_manifest(fields = command) # to check for mistakes
 # tar_visnetwork() # to check for the pipeline architecture
 # tar_make() # To run the pipeline
