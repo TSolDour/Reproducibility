@@ -14,16 +14,16 @@ format:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-| Foreword: You will find in the following the presentation of diverse tools to enhance the reproducibility of your analytical work carried out with R, using the IDE RStudio. Consequently, you need to have both installed on your machine to properly follow and experiment the content. To do so, go to the [Posit](https://posit.co/download/rstudio-desktop/) website and (i) install R (choose the version whether you have a windows or macOS system), (ii) install RStudio (choose the version whether you have a windows or macOS system).
+|   Foreword: You will find in the following the presentation of diverse tools to enhance the reproducibility of your analytical work carried out with R, using the IDE RStudio. Consequently, you need to have both installed on your machine to properly follow and experiment the content. To do so, go to the [Posit](https://posit.co/download/rstudio-desktop/) website and (i) install R (choose the version whether you have a windows or macOS system), (ii) install RStudio (choose the version whether you have a windows or macOS system).
 
 
 # **Introduction**
 
 |   Modern science requires for each experiment to be **replicable**, i.e. the capacity to “*obtain\[\] consistent results across studies aimed at answering the same scientific question, each of which has obtained its own data*”. (National Academies of Sciences, Engineering and Medecine, 2019 dans [Hicks, 2023](https://www.tandfonline.com/doi/epdf/10.1080/08989621.2021.1962713?needAccess=true)). This acception of replicability refers to the assumption of **universality of science**. In other words, if we demonstrate the neurotoxicity of mercury on *Sepia officinalis* on 1 January 2026 in La Rochelle, this *must be true* in Porto or Namur 10 years later. Consequently, replicability relies on the **qualitative consistency** of scientific results, as well as rigorous sharing of experimental set up.
 
-|   Since the advent of computers and numerical analyses, the notion of **reproducibility** has been added to that of **replicability**. A synonym of computational reproducibility, **reproducibility** consists in being able to "*obtain the same results from the same data by using the same computational steps, the same code, and the same analytical conditions*" (National Academies of Sciences, Engineering and Medecine, 2019 dans [Hicks, 2023](https://www.tandfonline.com/doi/epdf/10.1080/08989621.2021.1962713?needAccess=true)). It concerns the **quantitative consistency** of results and should be considered an **indispensable tool** for peer-review of outputs resulting from a research project (reports, articles, expert assessments, etc.).
+|   Since the advent of computers and numerical analyses, the notion of **reproducibility** has been added to that of **replicability**. A synonym of computational reproducibility, **reproducibility** refers to the ability to "*obtain the same results from the same data by using the same computational steps, the same code, and the same analytical conditions*" (National Academies of Sciences, Engineering and Medecine, 2019 dans [Hicks, 2023](https://www.tandfonline.com/doi/epdf/10.1080/08989621.2021.1962713?needAccess=true)). It concerns the **quantitative consistency** of results and should be considered an **indispensable tool** for peer-review of outputs resulting from a research project (reports, articles, expert assessments, etc.).
 
-|   While replicability involves a number of good practices (robust experimental designs, laboratory notebooks, enough replicates, randomization, etc.), reproductibility likewise relies on a set of tools and good habits to be adopted in numerical analysis within a research project.
+|   While replicability involves a number of good practices (robust experimental designs, laboratory notebooks, enough replicates, randomization, etc.), reproducibility likewise relies on a set of tools and good habits to be adopted in numerical analysis within a research project.
 
 |   Yes, but here is the catch!
 
@@ -37,12 +37,12 @@ knitr::opts_chunk$set(echo = TRUE)
 It refers to the way one organizes the working directory, which should be efficient (simplified paths, easily understandable file names) and standardized, in compliance with the **Research Compendium** convention.
 
 + **Project implementation**:
-As surprising as it may semm, a simple click in a graphical interface is not reproducible! It is therefore imperative to favor interaction with the machine via the **command line**, even though this may require long and demanding training. Moreover, the use and creation of *scripts* must follow certain rules. Likewise, the sequence of actions performed on the data (i.e. **workflow**) must be automated to avoid any operator-induced error or variation. Finally, it is important to keep in mind that any action performed on a computer - whether a command-line operation or the use of a point-and-click interface - will produce results that are closely tied to the **system environment**, which must therefore be taken into account.
+As surprising as it may semm, Actions performed through graphical interfaces are often not reproducible! It is therefore imperative to favor interaction with the machine via the **command line**, even though this may require long and demanding training. Moreover, the use and creation of *scripts* must follow certain rules. Likewise, the sequence of actions performed on the data (i.e. **workflow**) must be automated to avoid any operator-induced error or variation. Finally, it is important to keep in mind that any action performed on a computer - whether a command-line operation or the use of a point-and-click interface - will produce results that are closely tied to the **system environment**, which must therefore be taken into account.
 
 |   To address all of this, two main R packages are essential to know: *targets* and *renv*
 
 + **Project tracking**:
-Just as in the laboratory any modification to a protocol must be discussed with colleagues, collectively validated, and recorded in the lab notebook, any change made within a workflow must likewise be discussed, validated, documented, and **reversible**. To achieve this, **version control** (versioning) tools axist and should be used systematically.
+Just as in the laboratory any modification to a protocol must be discussed with colleagues, collectively validated, and recorded in the lab notebook, any change made within a workflow must likewise be discussed, validated, documented, and **reversible**. To achieve this, **version control** (versioning) tools exist and should be used systematically.
 
 |   *Git* (locally) and *GitHub* (remotely) are the version control tools most commonly used by the community.
 
@@ -51,17 +51,19 @@ Project sharing should rely on tools that limit the manual integration of variou
 
 |   In *RStudio*, the reference tool is *R Markdown*; it is *quarto* if you use the IDE new generation, i.e. *Positron*.
 
+|   Before going further, keep in mind that reproducibility is not perfection. It is about making your work understandable, inspectable, and improvable. Consequently, Every little bit of extra practice is already a big step forward!
+
 # **Project architecture**
 
 |   The project architecture must comply with the standards of the **Research Compendium** ([Gentleman & Lang, 2012](https://www.tandfonline.com/doi/abs/10.1198/106186007X178663)). It is a set of simple rules to follow in order to organize, in a **standardized** and **efficient** manner, the entire digital framework of your research project. By adopting this convention, anyone familiar with the Research Compendium will be able to quickly understand the project, extend it, disseminate it, and reproduce it. The Research Compendium thus constitutes the basic architecture of a reproducible project!
 
 ## **The fundamental structure**
 
-| All elements of a research project must be contained within a single working directory, here *Reproducibility*. They must, however, be clearly separated within that working directory.
+|   All elements of a research project must be contained within a single working directory, here *Reproducibility*. They must, however, be clearly separated within that working directory.
 
 ![](Images/image1.jpg){width=50%}
 
-| The minimum elements that must be present in your project's working directory are:
+|   The minimum elements that must be present in your project's working directory are:
 
 + **Data**:
 This folder should contain only the project's **raw data**, preferably set to **read-only**. Since the entire project relies on these data, they should never be manipulated ! Furthermore, cleaned data should already be considered as results and therefors should not be placed in this folder.
@@ -71,7 +73,7 @@ This folder contains the project's **scripts**. These scripts hold the actions p
 
 ![](Images/image2.jpg){width=20%}
 
-| To further facilitate understanding, it is also recommended to assign a standardized header to each script. There is no established standard; the header simply needs to allow reader to quickly understand which project the script belongs to, its role within the project, and, if necessary, how to contact the author.
+|   To further facilitate understanding, it is also recommended to assign a standardized header to each script. There is no established standard; the header simply needs to allow reader to quickly understand which project the script belongs to, its role within the project, and, if necessary, how to contact the author.
 
 ```{r, echo=TRUE}
 
@@ -89,12 +91,12 @@ This folder contains all the results: cleaned data, graphs, statistical outputs,
 Unlike the **Data** folder, whose contents are sacred, and the **R** folder, which requires careful tracking, the contents of **Results** have no intrinsic value since they can be reproduced identically and *ad libitum*. Therefore, there is no need to fear manipulating results, deleting them, moving them, etc.
 
 + **R_project**:
-Any self-respecting research project that uses R as its programming language for analyses should be carried out within an **R_project**. Located at the root of the working directory, the R_project associated with your project allows you to use **relative paths** for all files contained and produced in your working directory. Thus, by sharing your project along with the associated *.Rproj* file, it will never be necessary to modify the paths used in the scripts, nor specifying specific working directory.
+Any research project that uses R as its programming language for analyses should be carried out within an **R_project**. Located at the root of the working directory, the R_project associated with your project allows you to use **relative paths** for all files contained and produced in your working directory. Thus, by sharing your project along with the associated *.Rproj* file, it will never be necessary to modify the paths used in the scripts, nor specifying specific working directory.
 If you are not already systematically working within R_projects, now is the time to start! A tutorial for creating R_projects is available [here] (https://thinkr.fr/debuter-avec-r-et-rstudio/#Les_projets_R_avec_RStudio). This way, you will no longer need to specify your working directory environment using the `setwd()` function, which relies on absolute paths that are only valid on your own computer.
 
 ## **Additional elements**
 
-| Some elements can be added to the working directory which, while not mandatory, are still welcome.
+|   Some elements can be added to the working directory which, while not mandatory, are still welcome.
 
 + **README.txt**:
 The **README** file is intended to explain the project. It is generally the first file opened when exploring a project. It can include all relevant information needed to understand the origin, context, objective, and execution details of the project. It is also the appropriate place to list all project-specific system information: operating system, R version, packages and their versions, etc.
@@ -105,26 +107,102 @@ A **Docs** folder can optionally complement the working directory by containing,
 + **Report**:
 This folder may contain all the files related to the reporting of your project, i.e. working reports, presentations, manuscripts, images... If you do the reporting with Rmarkdown or Quarto (see section 6), having this folder within the Rproject working directory will facilitate the connection to your scripts and outputs.
 
+|   Before moving on to workflow automation and version control, it is useful to highlight a few common habits that strongly undermine reproducibility. If you get it, it is all done!
+
+::: {.callout-caution}
+## **Common reproducibility anti-patterns (and how to avoid them)**
+
+Even with the best intentions, some common habits strongly undermine reproducibility.
+Below is a non-exhaustive list of frequent anti-patterns, along with recommended alternatives.
+
+
++ **Using `setwd()` in scripts**
+*Why it is a problem:*  
+Absolute paths are machine-specific and will break when the project is moved or shared.
+
+*Prefer:* 
+Work inside an RStudio project and rely exclusively on relative paths.
+
+
+**Modifying raw data files**
+*Why it is a problem:* 
+Raw data are the foundation of the entire analysis. Any modification makes results unverifiable.
+
+*Prefer:*
+Treat raw data as read-only and perform all transformations through scripts.
+
+
++ **Copy-pasting results into Word or PowerPoint**
+
+*Why it is a problem:* 
+Manual transfer introduces errors and disconnects results from the code that produced them.
+
+*Prefer:*  
+Use R Markdown or Quarto to generate figures, tables, and text directly from the analysis.
+
+
++ **Running analyses interactively without scripts**
+
+*Why it is a problem:*  
+Point-and-click actions leave no trace and cannot be reproduced.
+
+*Prefer:* 
+Script every analytical step, even exploratory ones.
+
+
++ **Installing or updating packages without tracking versions**
+
+*Why it is a problem:*
+Results may change over time or across machines due to dependency updates.
+
+*Prefer:*
+Use `renv` to lock package versions and ensure a stable computational environment.
+
+
++ **Working without version control**
+
+*Why it is a problem:*  
+Changes are irreversible, undocumented, and difficult to share or review.
+
+*Prefer:*  
+Use Git to track all modifications to scripts, documentation, and configuration files.
+
+
++ **Sharing code without data examples**
+
+*Why it is a problem:*  
+Others cannot reproduce or debug the issue without understanding the data structure.
+
+*Prefer:*  
+Provide a minimal, self-contained reproducible example (reprex), including sample data.
+
+---
+
+**Key idea**
+Reproducibility is not about perfection or rigidity.  
+It is about making your work **understandable, inspectable, and reusable** — by yourself and by others.
+:::
+
 # **Project implementation - the *targets* package**
 
-| *targets* is a package used for managing **workflows**. It will be your ideal ally to organize your project, develop it further, and also keep an eye on the **project architecture** - very useful when the project contains multiple datasets, numerous scripts, and a large number of results, especially when these are interdependent! It also allows you to visualize the update status of your various objects.
+|   *targets* is a package used for managing **workflows**. It will be your ideal ally to organize your project, develop it further, and also keep an eye on the **project architecture** - very useful when the project contains multiple datasets, numerous scripts, and a large number of results, especially when these are interdependent! It also allows you to visualize the update status of your various objects.
 |   To understand how *targets* works, there is nothing better than a concrete example!
 
 -------------------------------------------------------------------------------
 
-| **Note that it is recommended to write your scripts in the form of functions. This allows (i) limiting the number of objects created when the scripts run, and (ii) simplifying as much as possible the use of the *targets* management script.**
+|   **Note that it is recommended to write your scripts in the form of functions. This allows (i) limiting the number of objects created when the scripts run, and (ii) simplifying as much as possible the use of the *targets* management script.**
 
 -------------------------------------------------------------------------------
 
-| For this example, we are going to use the dataset **Allo.csv** available [here](https://github.com/TSolDour/Reproducibility/tree/master/Data). It contains allometrics measurements of two bivalve species *Crassotrea gasar* and *Anadara senilis* from several sampling stations in the Sine Saloum Delta, Senegal.
-| For this project, we want to briefly compare the shell length of *C. gasar* between the different sampling stations. We want to:
+|   For this example, we are going to use the dataset **Allo.csv** available [here](https://github.com/TSolDour/Reproducibility/tree/master/Data). It contains allometrics measurements of two bivalve species *Crassotrea gasar* and *Anadara senilis* from several sampling stations in the Sine Saloum Delta, Senegal.
+|   For this project, we want to briefly compare the shell length of *C. gasar* between the different sampling stations. We want to:
 
 + (i) load the dataset and keep only *C. gasar* data;
 + (ii) compute descriptive statistics for each sampling station;
 + (iii) plot the data ;
 + (iv) make a multiple comparison test (ANOVA)
 
-| These four steps correspond to the following functions:
+|   These four steps correspond to the following functions:
 
 ```{r, eval=FALSE, include=TRUE}
 # Loading and tidying dataset
@@ -176,15 +254,15 @@ AnovaTest_gasar <- function(data, a, b){
 #---------------------------------------------------------------
 ```
 
-| In RStudio, create and open the .Rproject file for this project (at the root of the project), then open a new script and copy/paste the script above. Since the project is made of very few, simple functions, you can save everything in one script labelled *FUNCTIONS.R* to make it simple. But in a larger project, it is recommended to **properly split the sets of functions in different scripts**.
+|   In RStudio, create and open the .Rproject file for this project (at the root of the project), then open a new script and copy/paste the script above. Since the project is made of very few, simple functions, you can save everything in one script labelled *FUNCTIONS.R* to make it simple. But in a larger project, it is recommended to **properly split the sets of functions in different scripts**.
 
-| Now your script is ready and properly saved in the **R** folder of the project, you can use the *targets* package.
+|   Now your script is ready and properly saved in the **R** folder of the project, you can use the *targets* package.
 
-| In the RStudio console, run the following: `install.packages("targets")` (only once, it is to install the package on your machine), then `targets::tar_config_set(script = "Reproducibility_targets.R", store = "Results", project = "Reproducibility")` (only once, to set the basic configuration of your project). In the latter function, *script* defines the main dashboard script of the project, *store* defines the folder where you want to store the outputs and *project* defines the root folder of the project. This creates a _*targets.yaml* configuration file which is automatically stored at the root.
+|   In the RStudio console, run the following: `install.packages("targets")` (only once, it is to install the package on your machine), then `targets::tar_config_set(script = "Reproducibility_targets.R", store = "Results", project = "Reproducibility")` (only once, to set the basic configuration of your project). In the latter function, *script* defines the main dashboard script of the project, *store* defines the folder where you want to store the outputs and *project* defines the root folder of the project. This creates a _*targets.yaml* configuration file which is automatically stored at the root.
 
-| You can now start to use *targets*, running `use_targets(script = "Reproducibility_targets.R")`in the RStudio console. It creates the following script, labeled with the project's name, i.e. *Reproducibility_targets.R*. **Save it at the root of the project**, this is the dashboard of the workflow. It is always through it that you will run the workflow after having edited existing scripts or created new ones.
+|   You can now start to use *targets*, running `use_targets(script = "Reproducibility_targets.R")`in the RStudio console. It creates the following script, labeled with the project's name, i.e. *Reproducibility_targets.R*. **Save it at the root of the project**, this is the dashboard of the workflow. It is always through it that you will run the workflow after having edited existing scripts or created new ones.
 
-| Let's see how *Reproducibility_targets.R* works:
+|   Let's see how *Reproducibility_targets.R* works:
 
 + First, introduce a function to **clean your working environment**:
 ```{r eval=FALSE, include=TRUE}
@@ -213,7 +291,7 @@ list(
                                                          data$Station)))
 ```
 
-|   Now, your project is ready to be managed by *targets*! Nothingelse should be put in this script. Obviously, you can update it with new scripts, new functions, ne packages, etc... As your running through the project.
+|   Now, your project is ready to be managed by *targets*! This script should contain only target definitions. Obviously, you can update it with new scripts, new functions, ne packages, etc... As your running through the project.
 
 |   Several basic functions are available to interact with the workflow. Use them in the console, not in the script.
 
@@ -226,17 +304,17 @@ tar_make() # To run the workflow
 tar_read() # To see the outputs
 ```
 
-| `tar_visnetwork()` is very useful, it visualizes the whole project in a dynamic plot. In our example, if you run it after `tar_make()`, the resulting figure will be:
+|   `tar_visnetwork()` is very useful, it visualizes the whole project in a dynamic plot. In our example, if you run it after `tar_make()`, the resulting figure will be:
 
 ![](Images/visnetwork.png){width=50%}
 
-| Here you can see the different objects of the project and their state: outdated/up to date/errored. Consequently, you can have a clear idea, at any time, of the overall state of your project. For example, here, the target `Anova_gasar_Length_Station` is errored, meaning that there is something wrong in the function `AnovaTest_gasar()`.
+|   Here you can see the different objects of the project and their state: outdated/up to date/errored. Consequently, you can have a clear idea, at any time, of the overall state of your project. For example, here, the target `Anova_gasar_Length_Station` is errored, meaning that there is something wrong in the function `AnovaTest_gasar()`.
 
-| Besides, `Sys.setenv()` is useful when your working directory contains several sub-projects.The specified argument relates to the content of the _*PROJECT.yaml* file where all the sub-projects of the reportory are listed and where you define the folders in which store the related *outputs*.
+|   Besides, `Sys.setenv()` is useful when your working directory contains several sub-projects.The specified argument relates to the content of the _*PROJECT.yaml* file where all the sub-projects of the reportory are listed and where you define the folders in which store the related *outputs*.
 
 # **The reproducibility of the working environment - the *renv* package**
 
-| The *renv* package presents many interests to enhance the reproducibility of your projects:
+|   The *renv* package presents many interests to enhance the reproducibility of your projects:
 
 + (i) It enables to **isolate** each project from each other by providing their own **libraries** (set of packages). Thus, you will never impact other projects by installing or updating packages within the current project, reducing dependencies issues.
 
@@ -246,7 +324,7 @@ tar_read() # To see the outputs
 
 |   **Semantic clarification:** The term "*library*" refers to a folder containing all the *packages* used. Usualy, with the function `library()` one load packages from the *system library* shared by all the R projects. With *renv*, *specific libraries* are created for each project.
 
-| Once you have installed the package (`install.packages("renv")`), you can run `renv::init()` to convert your project. Three entities will be created at the root of the project:
+|   Once you have installed the package (`install.packages("renv")`), you can run `renv::init()` to convert your project. Three entities will be created at the root of the project:
 
 + The **project's library**: *renv/library*. Here are stored all the packages.
 
@@ -254,31 +332,31 @@ tar_read() # To see the outputs
 
 + The **R profile**: *.Rprofile*. It is used by *renv* to configure each new R session so it can use the project library.
 
-| As you progress through the project, you will probably need to install, load and update packages. To properly update the *renv.lock* file, you just have to run `renv::snapshot()`.
+|   As you progress through the project, you will probably need to install, load and update packages. To properly update the *renv.lock* file, you just have to run `renv::snapshot()`.
 
 |  Finally, `renv::restore()` uses the *renv.lock* file to re-install the whole project library when you share your project on another machine.
 
-| Here are the three function `init())`, `snapshot()`, `restore()`, enabling the basic use of *renv* to enhance your project reproducibility. If you are interesting in more advanced use of *renv*, you can find more informations [here](https://rstudio.github.io/renv/articles/renv.html).
+|   Here are the three function `init())`, `snapshot()`, `restore()`, enabling the basic use of *renv* to enhance your project reproducibility. If you are interesting in more advanced use of *renv*, you can find more informations [here](https://rstudio.github.io/renv/articles/renv.html).
 
 # **Project versioning - Git and Github**
 
 ## **What are we talking about?**
 
-| **Git** is a **version control** system initially designed for **collaborative work** in the informatics community. Therefore, it enables to follow the evolution of all the documents within a project - a **repository**.
+|   **Git** is a **version control** system initially designed for **collaborative work** in the informatics community. Therefore, it enables to follow the evolution of all the documents within a project - a **repository**.
 
-| **Warning:** **Git** can be hard to handle. It is all but intuitive... If you don't work in a *collaborative mode*, there probably are plenty of easier ways to ensure local versioning of your project. In other words, dive into the world of Git only makes sense if you work on projects with colleagues susceptible to participate in the scripts, panuscripts and other outputs of the project (it is actually the case for almost all the researchers!). In that case, you will not only need Git but its *remote* counterpart. There are different ones but the most commonly used is **GitHub**.
+|   **Warning:** **Git** can be hard to handle. It is all but intuitive... If you don't work in a *collaborative mode*, there probably are plenty of easier ways to ensure local versioning of your project. In other words, dive into the world of Git only makes sense if you work on projects with colleagues susceptible to participate in the scripts, manuscripts and other outputs of the project (it is actually the case for almost all the researchers!). In that case, you will not only need Git but its *remote* counterpart. There are different ones but the most commonly used is **GitHub**.
 
-| In the following, you will learn how to **use RStudio in version control with Git and GitHub**. You need to have a free account on [**GitHub**](https://github.com/). 
+|   In the following, you will learn how to **use RStudio in version control with Git and GitHub**. You need to have a free account on [**GitHub**](https://github.com/). 
 
 ------------------------------------------------------------------------
 
-| This section is a synthesis from the amazing *Happy Git and Github for the useR*. It aims at providing **clear and simple** guide to start with Git and GitHub. But, as all simple things, it is  mainly incomplete. If you want to go further into *versioning*, do not hesitate to look at [*Happy Git and Github for the useR*](https://happygitwithr.com/).
+|   This section is a synthesis from the amazing *Happy Git and Github for the useR*. It aims at providing **clear and simple** guide to start with Git and GitHub. But, as all simple things, it is  mainly incomplete. If you want to go further into *versioning*, do not hesitate to look at [*Happy Git and Github for the useR*](https://happygitwithr.com/).
 
 ------------------------------------------------------------------------
 
 ## **Installing Git**
 
-| There are several ways to install Git but they are not all equivalent.
+|   There are several ways to install Git but they are not all equivalent.
 
 + On a **windows** machine, it is advised to follow this [**protocol**](https://gitforwindows.org/) which automatically installs the **Git bash** and some other required tools. Besides, it stores the .exe file in a conventional folder easy to use for RStudio.
 
@@ -286,15 +364,15 @@ tar_read() # To see the outputs
 
 ## **Configuring Git**
 
-| Before going to R, you have to be introduced with the basic Git commands. On windows, open the **Git Bash** (accessible fromm the "Search" menu of your machine); on macOS, just open the **terminal**.
+|   Before going to R, you have to be introduced with the basic Git commands. On windows, open the **Git Bash** (accessible from the "Search" menu of your machine); on macOS, just open the **terminal**.
 
-| Once open, these apps are nothing but a **shell**, a user interface enabling to understand commands sent in informatic language. We are going to use the **bash** language. A comprehensive list of basic bash commands are available [**here**](https://www.unixmaniax.fr/wiki/index.php?title=Bash_-_les_commandes).
+|   Once open, these apps are nothing but a **shell**, a user interface enabling to understand commands sent in informatic language. We are going to use the **bash** language. A comprehensive list of basic bash commands are available [**here**](https://www.unixmaniax.fr/wiki/index.php?title=Bash_-_les_commandes).
 
-| Here is your interface, the dollar symbolises the start of the command line:
+|   Here is your interface, the dollar symbolises the start of the command line:
 
-| ![](Images/Image3.jpg)
+![](Images/Image3.jpg)
 
-| From there, you can navigate in your machine and perform some basic actions: 
+|   From there, you can navigate in your machine and perform some basic actions: 
 
 ```{bash eval=FALSE, include=TRUE}
 cd PATH           # Navigate toward the specified directory; 
@@ -305,9 +383,9 @@ mkdir NAME        # Create a new folder;
 rm -r NAME        # remove a folder
 ```
 
-| Once you master these functions, it's time to **configure** your Git!
+|   Once you master these functions, it's time to **configure** your Git!
 
-| The Git synthaxe is always `Git COMMANDE --ARGUMENT`. To configure Git, we use `git config`:
+|   The Git synthaxe is always `Git COMMANDE --ARGUMENT`. To configure Git, we use `git config`:
 
 ```{bash eval=FALSE, include=TRUE}
 git config --global user.name "your name"
@@ -316,7 +394,7 @@ git config --global core.editor "emacs" #or any other prefered editor
 git config --global init.defaultBranch "master" #Main branch of your projects
 ```
 
-| Numerous other config options are available, that you have to discover by yourself, for instance [**here**](https://git-scm.com/book/fr/v2/Personnalisation-de-Git-Configuration-de-Git). To see your complete set of options:
+|   Numerous other config options are available, that you have to discover by yourself, for instance [**here**](https://git-scm.com/book/fr/v2/Personnalisation-de-Git-Configuration-de-Git). To see your complete set of options:
 
 ```{bash eval=FALSE, include=TRUE}
 git config --global --list
@@ -324,15 +402,15 @@ git config --global --list
 
 ## **Connecting Git and GitHub**
 
-| Now Git knows you, let's introduce him your GitHub! Here as well, several ways to proceed exist. I will just present the easier.
+|   Now Git knows you, let's introduce him your GitHub! Here as well, several ways to proceed exist. I will just present the easier.
 
-| First, you must generate a **PAT** (Personal Access Token). The PAT is a kind of password testifying that youy belon to the Git and defining what you can do or not.
+|   First, you must generate a **PAT** (Personal Access Token). The PAT is a kind of password testifying that youy belon to the Git and defining what you can do or not.
 
-| Two ways to generate a **PAT**:
+|   Two ways to generate a **PAT**:
 +   Directly *via* Github, once connected, click on *settings>Developer settings>Personal access tokens>Generate new token*
 +   *Via* RStudio, install the *usethis* packages (`install.packages("usethis")`) and run the following function `usethis::create_github_token()`. A pop-up will open to **(i) describe** the PAT (its purpose), **(ii) define an expiration date** (advised by GitHub) and **(iii) define a scope**. Once you specify this params, click *Generate token*.
 
-| **BEFORE TO CLOSE THE POP-UP** make sure to properly **copy** the **PAT**, cause once you close it you will no be able to access it again! I advise you to copy the PAT in a safe place, easily accessible by RStudio, Git and GitHub using `gitcreds::gitcreds_set()`. R will ask you to give your PAT to store it in a safe place:
+|   **BEFORE TO CLOSE THE POP-UP** make sure to properly **copy** the **PAT**, cause once you close it you will no be able to access it again! I advise you to copy the PAT in a safe place, easily accessible by RStudio, Git and GitHub using `gitcreds::gitcreds_set()`. R will ask you to give your PAT to store it in a safe place:
 
 ```{r eval=FALSE, include=TRUE}
 gitcreds::gitcreds_set()
@@ -343,10 +421,10 @@ gitcreds::gitcreds_set()
 -> Done.
 ```
 
-| **Remark:** Since your PAT is temporary, you will have to regularly repeat the protocol. It is not practical but it is for a security purpose.
+|   **Remark:** Since your PAT is temporary, you will have to regularly repeat the protocol. It is not practical but it is for a security purpose.
 
 
-| Here we are! You can now connect Git and GitHub.
+|   Here we are! You can now connect Git and GitHub.
 
 + In Github, click the big green button *new*, jsut next to **repositories**. Fill the form and let the default parameters. Give your repository the same name as your local project you want to connect - i.e. *Reproducibility*, then click *Create repository*.
 
@@ -383,32 +461,32 @@ git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
 git push --set-upstream origin master
 ```
 
-| Refreshing the GitHub webpage, you should see your project. Now, consider the GitHub repository as the main localization of your project (the one that must always be up-to-date). Your local machine became a simple way to act on your project.
+|   Refreshing the GitHub webpage, you should see your project. Now, consider the GitHub repository as the main localization of your project (the one that must always be up-to-date). Your local machine became a simple way to act on your project.
 
-| **Remark:** Using `Git clone URL HTTPS` you can do the opposite, that is import a repository from GitHub to your local machine.
+|   **Remark:** Using `Git clone URL HTTPS` you can do the opposite, that is import a repository from GitHub to your local machine.
 
 ## **Example for routine use**
 
-| Now, you have to now the architecture of Git and GitHub, and some basic functions to start using it properly. A basic routine use of Git and GitHub is displayed in the following scheme:
+|   Now, you have to now the architecture of Git and GitHub, and some basic functions to start using it properly. A basic routine use of Git and GitHub is displayed in the following scheme:
 ![](Images/Image6.jpg)
 
-| Considering **the last version of your project is on GitHub**, start your working day by navigate to your local project's root using `cd PATH`. Then use `git pull` to load the last version of the project from GitHub to your local machine. You now have your up-to-date project in the *master* branch of Git.
+|   Considering **the last version of your project is on GitHub**, start your working day by navigate to your local project's root using `cd PATH`. Then use `git pull` to load the last version of the project from GitHub to your local machine. You now have your up-to-date project in the *master* branch of Git.
 
-| To secure your work, I advise you to immediately create a parallel branch on which you can do all the modifications you want before merging them to the main branch. Always give **explicit names** to the different branches you will create. Here, for instance: `git branch working`. Once the branch exists, you have to position yourself on it using `git checkout working`. If you are lost and want to know on which branch you are, use `git branch`.
+|   To secure your work, I advise you to immediately create a parallel branch on which you can do all the modifications you want before merging them to the main branch. Always give **explicit names** to the different branches you will create. Here, for instance: `git branch working`. Once the branch exists, you have to position yourself on it using `git checkout working`. If you are lost and want to know on which branch you are, use `git branch`.
 
-| Ok, now you are on the parallel branch (*working*), which contains the same version of the project as the main branch (*master*). You can start to work!
+|   Ok, now you are on the parallel branch (*working*), which contains the same version of the project as the main branch (*master*). You can start to work!
 
-| For instance, you can create the README.txt file at the root of the project or modify it if it already exists. This modification exists only in your *working* branch but it is not already tracked by Git. You need to:
+|   For instance, you can create the README.txt file at the root of the project or modify it if it already exists. This modification exists only in your *working* branch but it is not already tracked by Git. You need to:
 
 + Ask Git to track the modification: `git add FileName`;
 
 + Ask Git to capture the modification. We talk about **commit**, which is a kind of snapshot of the project. To make a commit, you need to add a comment so you can easily know what was committed if you go back to it later. To make it as clear as possible, it is advised to commit consistent set of objects independantly. The function is: `git commit Filename -m "Your message"`.
 
-| **Remark :** If you are lost, you can check the Git status of the project with: `git status`.
+|   **Remark :** If you are lost, you can check the Git status of the project with: `git status`.
 
-| Thus, after each commit, it is a new version of your project that is saved on the branch. Don't need to commit after each modification. Do it at strategic steps, when a significant modification has been added: new script, new data, new result... Committing several times along the working day, the project evolves and keeps a trace of each key step: the project versions. Here is the interest of versionning, in case of error, or any problem, you can go back to the last commit using `git reset HEAD^`.
+|   Thus, after each commit, it is a new version of your project that is saved on the branch. Don't need to commit after each modification. Do it at strategic steps, when a significant modification has been added: new script, new data, new result... Committing several times along the working day, the project evolves and keeps a trace of each key step: the project versions. Here is the interest of versionning, in case of error, or any problem, you can go back to the last commit using `git reset HEAD^`.
 
-| At the end of the work session, you can transfer the last version toward GitHub. Two possibilities:
+|   At the end of the work session, you can transfer the last version toward GitHub. Two possibilities:
 
 + (i) You are satisfied of the work, confident in the modifications, and nobody needs to validate them. Thus, go to your *master* branch: `git branch master`, then merge the *working* branch to the *master*: `git merge working`. Now run `git push` to make the transfer toward GitHub.
 
@@ -416,19 +494,19 @@ git push --set-upstream origin master
 
 Now, refreshing the GitHub page, you can see the new version of the project.
 
-| **Remark:** Thanks to the commits, you can move into the history of the project. Use `git log` to access the history:
+|   **Remark:** Thanks to the commits, you can move into the history of the project. Use `git log` to access the history:
 
 ![](Images/Image9.jpg){width=75%}
 
-| Each commit has an identification number - the **hash**, an **author**, a **creation data** and a **message**. Consequently, you can find any version of the project et go back to it if necessary **without modifying nor deleting the subsequent version**. This is done with `git checkout CommitHash`. You can then see the related project version, make some modifications or even create a new branch from this particular commit (`git checkout -b NewBranch CommitHash` or `git switch -c <NewBranch>` if you are already on the commit) to start some parallel work you can merge later.
+|   Each commit has an identification number - the **hash**, an **author**, a **creation data** and a **message**. Consequently, you can find any version of the project et go back to it if necessary **without modifying nor deleting the subsequent version**. This is done with `git checkout CommitHash`. You can then see the related project version, make some modifications or even create a new branch from this particular commit (`git checkout -b NewBranch CommitHash` or `git switch -c <NewBranch>` if you are already on the commit) to start some parallel work you can merge later.
 
-| The use of Git and GitHub can be much more subtle and complex than what is present above. To learn more on Git function and improve your versioning skills, go [**there**](https://git-scm.com/book/en/v2)!
+|   The use of Git and GitHub can be much more subtle and complex than what is present above. To learn more on Git function and improve your versioning skills, go [**there**](https://git-scm.com/book/en/v2)!
 
 ## **Connect RStudio to Git and GitHub**
 
-| If you regularly use RStudio, you can simplify your interaction with Git and GitHub from the IDE. Let's connect RStudio to Git and GitHub! 
+|   If you regularly use RStudio, you can simplify your interaction with Git and GitHub from the IDE. Let's connect RStudio to Git and GitHub! 
 
-| There are some prerequisites:
+|   There are some prerequisites:
 
 + Have a Github free account;
 
@@ -438,33 +516,33 @@ Now, refreshing the GitHub page, you can see the new version of the project.
 
 + Have a valid connexion between your Git and GitHub.
 
-| If you did not restart RStudio since you installed Git, do it.
+|   If you did not restart RStudio since you installed Git, do it.
 
-| Now, be sure RStudio properly localize the Git .exe. If you followed the **section 5.2** it should be ok.
+|   Now, be sure RStudio properly localize the Git .exe. If you followed the **section 5.2** it should be ok.
 
-| To be sure, click on *Tools > Global options... > Git/SVN* in RStudio. In this menu, check if the path to Git .exe is correct. Then check *"Enable version control interface for Rstudio projects"* and click on *Apply* at the bottom of the window. Restart Rstudio and open the *Reproducibility* project whose already tracked by Git.
+|   To be sure, click on *Tools > Global options... > Git/SVN* in RStudio. In this menu, check if the path to Git .exe is correct. Then check *"Enable version control interface for Rstudio projects"* and click on *Apply* at the bottom of the window. Restart Rstudio and open the *Reproducibility* project whose already tracked by Git.
 
-| You should see at the top-right of the window a button *Git* enabling to **track the modifications**, make **commit**, **push**, **pull**, create **new branches** and navigate between them.
+|   You should see at the top-right of the window a button *Git* enabling to **track the modifications**, make **commit**, **push**, **pull**, create **new branches** and navigate between them.
 
 ![](Images/Image8.jpg){width=50%}
 
-| The use of Git *via* RStudio will not be described here. A good tuto can be find [**there**](https://thinkr.fr/travailler-avec-git-via-rstudio-et-versionner-son-code/#Realiser_un_backup).
+|   The use of Git *via* RStudio will not be described here. A good tuto can be find [**there**](https://thinkr.fr/travailler-avec-git-via-rstudio-et-versionner-son-code/#Realiser_un_backup).
 
 # **Rendering the work**
 
 ## **Introduction to Rmarkdown**
 
-| Here, we will only speak about the written reporting of the project: articles, reports, books, etc.
+|   Here, we will only speak about the written reporting of the project: articles, reports, books, etc.
 
-| Ordinary people usually use softwares like **Word**, **OpenOffice**, **LibreOffice**, etc. These text edit softwares are defined as **WYSIWYG**: "What You See Is What You Get". Their main advantage is the click-button interface which are very user friendly. Nevertheless, if you want to program a quite complex document with specific formatting, images, tables, or even code, the **WYSIWYG** softwares become very labrious.
+|   Ordinary people usually use softwares like **Word**, **OpenOffice**, **LibreOffice**, etc. These text edit softwares are defined as **WYSIWYG**: "What You See Is What You Get". Their main advantage is the click-button interface which are very user friendly. Nevertheless, if you want to program a quite complex document with specific formatting, images, tables, or even code, the **WYSIWYG** softwares become very labrious.
 
-| Hopefuly, there is an alternative! These are **WYSIWYM** softwares: "What You See Is What You Mean". They are base on a **mark-up language** enabling to completely seperate content and form. Some mark-up languages are well-know, i.e. **LaTeX** ou **HTML**. The principle is simple: by integrating *in the text* the marks of a particular form, the operator focuses only on the content. The formatting is automatically made by compilers.
+|   Hopefuly, there is an alternative! These are **WYSIWYM** softwares: "What You See Is What You Mean". They are base on a **mark-up language** enabling to completely seperate content and form. Some mark-up languages are well-know, i.e. **LaTeX** ou **HTML**. The principle is simple: by integrating *in the text* the marks of a particular form, the operator focuses only on the content. The formatting is automatically made by compilers.
 
-| The **WYSIWYM** associated to R is **Rmarkdown**, an adapted version from the original, very simple **Markdown**. Rmarkdown documents are dynamics. It means that they integrate both text - to convey a message - and code - to perform analyses and figures.
+|   The **WYSIWYM** associated to R is **Rmarkdown**, an adapted version from the original, very simple **Markdown**. Rmarkdown documents are dynamics. It means that they integrate both text - to convey a message - and code - to perform analyses and figures.
 
 ## **Structure of a Rmarkdown document**
 
-| A Rmarkdown document if made of three main elements: 
+|   A Rmarkdown document if made of three main elements: 
 
 ![](Images/Image10.jpg){width=75%}
 
@@ -481,16 +559,16 @@ toc: TRUE
 ---
 ```
 
-| By default, the frontmatter contains the metadata: title, author, date, output type. You can specify many other informations to **customise** your doc. For instance here: `toc: TRUE` activate an automatic table of content at the beginning of the doc.
+|   By default, the frontmatter contains the metadata: title, author, date, output type. You can specify many other informations to **customise** your doc. For instance here: `toc: TRUE` activate an automatic table of content at the beginning of the doc.
 
 + **The content**:
 The content is nothing but the text you will write and customise with the **marks**.
 
 ![](Images/Image11.jpg){width=75%}
 
-| For instance, you can write in *italic* or in **bold**.
+|   For instance, you can write in *italic* or in **bold**.
 
-| You can also make some bullet points:
+|   You can also make some bullet points:
 
 + first bullet;
 
@@ -498,26 +576,26 @@ The content is nothing but the text you will write and customise with the **mark
 
 + third bullet
 
-| Or event insert code directly in the text: `usethis::create_github_token()`
+|   Or event insert code directly in the text: `usethis::create_github_token()`
 
 + **the code chunks**:
 Here is the Rmarkdown interest: you can insert **chunks**, that are spaces dedicated to R language used to produce analyses and figures directly in the document.
 
 -------------------------------------------------------------------
 
-| If you want to know (much) more about Rmarkdown, go to the [**markdown guide**](https://www.markdownguide.org/) and [**Rmarkdown guide**](https://bookdown.org/yihui/rmarkdown/).
+|   If you want to know (much) more about Rmarkdown, go to the [**markdown guide**](https://www.markdownguide.org/) and [**Rmarkdown guide**](https://bookdown.org/yihui/rmarkdown/).
 
 -------------------------------------------------------------------
 
-| Recently, the developers of Rstudio - Posit - published a new version of Rmarkdown: **quarto**. It is mostly the same, with the structure frontmatter, content and chunks, and using markdown. But it has the advantage of accepting R and python languages, and to facilitate the creation of books and websites. If you know how to use Rmarkdown, you won't have any difficulties to adopt quarto ! To download, it is [here](https://quarto.org/docs/get-started/) and the man is [here](https://quarto.org/docs/guide/).
+|   Recently, the developers of Rstudio - Posit - published a new version of Rmarkdown: **quarto**. It is mostly the same, with the structure frontmatter, content and chunks, and using markdown. But it has the advantage of accepting R and python languages, and to facilitate the creation of books and websites. If you know how to use Rmarkdown, you won't have any difficulties to adopt quarto ! To download, it is [here](https://quarto.org/docs/get-started/) and the man is [here](https://quarto.org/docs/guide/).
 
-| What is very interesting with Rmarkdown and quarto is that they can be used in association with a *targets* project. It is very simple, you just have to install and load in the _*targets.R* script the *tarchetypes* package. Then, at the end of the list of targets, just add `tar_render(Name, path_to_the_Rmarkdown)` or `tar_quarto(Name, path_to_the_quarto)`. As for the other targets, use `tar_make()` to run it and your dynamic report will be automatically outputted. In your Rmarkdown or quarto document, you can point toward targets to directly include the outputs of your workflow in your report/article/book, etc. In particular to write scientific articles, it is powerful! A quarto example based on this reproducibility project is available here. Check the files [*Article.qmd*](https://github.com/TSolDour/Reproducibility/blob/master/Report/Article/Article.qmd) and [*Reproducibility_targets.R*](https://github.com/TSolDour/Reproducibility/blob/master/Reproducibility_targets.R) at the root of the project.
+|   What is very interesting with Rmarkdown and quarto is that they can be used in association with a *targets* project. It is very simple, you just have to install and load in the _*targets.R* script the *tarchetypes* package. Then, at the end of the list of targets, just add `tar_render(Name, path_to_the_Rmarkdown)` or `tar_quarto(Name, path_to_the_quarto)`. As for the other targets, use `tar_make()` to run it and your dynamic report will be automatically outputted. In your Rmarkdown or quarto document, you can point toward targets to directly include the outputs of your workflow in your report/article/book, etc. In particular to write scientific articles, it is powerful! A quarto example based on this reproducibility project is available here. Check the files [*Article.qmd*](https://github.com/TSolDour/Reproducibility/blob/master/Report/Article/Article.qmd) and [*Reproducibility_targets.R*](https://github.com/TSolDour/Reproducibility/blob/master/Reproducibility_targets.R) at the root of the project.
 
 # **The reproducibility: a way to find help!**
 
-| To produce analyses and scripts easily reproducible is also the best way to find help when needed. Whether you ask a colleague, a professor or even an artificial intelligence, you have more chance to find a satisfying answer if you give understandable and usuable piece of code - a "*reprex*": REPRoducible EXample.
+|   To produce analyses and scripts easily reproducible is also the best way to find help when needed. Whether you ask a colleague, a professor or even an artificial intelligence, you have more chance to find a satisfying answer if you give understandable and usable piece of code - a "*reprex*": REPRoducible EXample.
 
-| A good reprex relies on few bases that must be considered seriously:
+|   A good reprex relies on few bases that must be considered seriously:
 
 + The code and data must be as short as possible. Do not send your whole script, only the problematic part! In the same way, a data set shortened at the maximum is often enough to render its structure.
 
@@ -527,13 +605,13 @@ Here is the Rmarkdown interest: you can insert **chunks**, that are spaces dedic
 
 + The code must by easy to copy and execute.
 
-| With R, there are three packages to garantee all of this: *styler*, *datapasta* et *reprex*.
+|   With R, there are three packages to garantee all of this: *styler*, *datapasta* et *reprex*.
 
 ## ***styler* for a perfect formatting**
 
-| *styler* is a R package that automaticaly formats your script based on "official" standards. First, install it: `install.packages("styler")`. Then, restart the R session.
+|   *styler* is a R package that automaticaly formats your script based on "official" standards. First, install it: `install.packages("styler")`. Then, restart the R session.
 
-| Now you can use *style* via the Rstudo addin as bellow:
+|   Now you can use *style* via the Rstudo addin as bellow:
 
 ![](Images/StylerAddin.png)
 
@@ -545,7 +623,7 @@ or via 3 main functions :
 
 + `style_text()` : to format text specified as vector.
 
-| The most simple is to use the addin. For instance, using `style selection` after having selected this code:
+|   The most simple is to use the addin. For instance, using `style selection` after having selected this code:
 
 ```{r, eval=FALSE, include=TRUE }
 a<-c(1:10 )
@@ -563,17 +641,17 @@ data <- data.frame(a, b) %>%
   mutate(c = ifelse(b = "A", "avocat", "banane"))
 ```
 
-| A script perfectly formatted and clear. *styler* will not correct the code errors, nor enhance your coding skills. But a standardize formatting simplifies the reading for those who will check your scripts.
+|   A script perfectly formatted and clear. *styler* will not correct the code errors, nor enhance your coding skills. But a standardize formatting simplifies the reading for those who will check your scripts.
 
 ## ***tribble* to present your data**
 
-| A clean code is not useful without data, and the vast majority of issues happens in the particular case of a particular data set. Thus, you must put **into your code** a sample of the related dataset, enabling to properly reproduce the actions coded in the script. You can do it with the *datapasta* R package. Install it with the classical protocol: `install.packages("datapasta")`.
+|   A clean code is not useful without data, and the vast majority of issues happens in the particular case of a particular data set. Thus, you must put **into your code** a sample of the related dataset, enabling to properly reproduce the actions coded in the script. You can do it with the *datapasta* R package. Install it with the classical protocol: `install.packages("datapasta")`.
 
-| *datapasta* enables to code the structure and the content of a dataset directly from any spreadsheet software, *via* a simple copy/paste action. Once the package is installed, and your session has restarted, a dedicated addin appears:
+|   *datapasta* enables to code the structure and the content of a dataset directly from any spreadsheet software, *via* a simple copy/paste action. Once the package is installed, and your session has restarted, a dedicated addin appears:
 
 ![](Images/datapastaAddin.png)
 
-| Then, to produce a simple example of your data, you just have to:
+|   Then, to produce a simple example of your data, you just have to:
 
 + open the data in a spreadsheet et copy a sufficient fraction in your clipboard:
 
@@ -612,13 +690,13 @@ df <- tibble::tribble(
 
 ```
 
-| If your data are already loaded in R and formatted as a dataframe, you can produce the same code with the following: `datapasta::dpasta(df)`.
+|   If your data are already loaded in R and formatted as a dataframe, you can produce the same code with the following: `datapasta::dpasta(df)`.
 
-| Combining *styler* and *datapasta*, you are now able to produce a correctly formatted script reproducing the data you want to share as example. Now, you have to export the script in a format easy to read and execute from a GitHub-like forum, or StackOverflow, or even from an email.
+|   Combining *styler* and *datapasta*, you are now able to produce a correctly formatted script reproducing the data you want to share as example. Now, you have to export the script in a format easy to read and execute from a GitHub-like forum, or StackOverflow, or even from an email.
 
 ## ***reprex* : exporting a fully reproducible script**
 
-| The *reprex* package does the job! Once you have your perfect script, for instance:
+|  The *reprex* package does the job! Once you have your perfect script, for instance:
 
 ```{r, eval=FALSE, include=TRUE}
 
@@ -672,11 +750,11 @@ df_OK %>%
 
 ```
 
-| You just have to copy the script in the clipboard and run `reprex()`in the Rstudio console. The Viewer displays the rendering and the clipboard contains the code to paste in your message (on GitHub, StackOverflow, email, ChatGPT, etc.).
+|   You just have to copy the script in the clipboard and run `reprex()`in the Rstudio console. The Viewer displays the rendering and the clipboard contains the code to paste in your message (on GitHub, StackOverflow, email, ChatGPT, etc.).
 
-| In the following example, where a plot is integrated, the line `![](https://i.imgur.com/i9Yj4sP.png)<!-- -->` (**do not modify!**) enables to visualize the plot without running the code. It can be very useful if your issue is related to the graphic!
+|   In the following example, where a plot is integrated, the line `![](https://i.imgur.com/i9Yj4sP.png)<!-- -->` (**do not modify!**) enables to visualize the plot without running the code. It can be very useful if your issue is related to the graphic!
 
-| To go further with `reprex()`, you have to know some arguments:
+|   To go further with `reprex()`, you have to know some arguments:
 
 + `venue = c("gh", "so", "ds", "r", "rtf", "html")` must be set based on the destination of your example. From left to right, the values correspond to GitHub, stackOverflow, Rstudio community, "R-friendly" output, Rich-Text Format, HTML document.
 
