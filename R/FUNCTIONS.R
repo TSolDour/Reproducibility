@@ -5,27 +5,27 @@ library(readr)
 library(dplyr)
 library(ggplot2)
 
+# Load data
 load_gasar <- function(file){
   read_table(file=file, locale = locale(decimal_mark = ",")) %>%
     data.frame() %>%
     filter(Espece == "Crassotrea_gasar")
 }
 
-
+# Summarise data
 Res_gasar <- function(data) {
   data %>%
     group_by(Station, Lot) %>%
     summarise(length=mean(Longueurs) )
 }
 
-
-
+# Plot data
 Plot_length <- function(Resume){
   ggplot(data = Resume, aes(x=Station, y=length, color=Lot)) +
     geom_point()
 }
 
-  
+# Run analysis of variance (ANOVA)
 AnovaTest <- function(data, a, b){
   Obj <- aov(a ~ b, data=data)
   Shap <-  shapiro.test(Obj$residuals)
@@ -43,4 +43,3 @@ AnovaTest <- function(data, a, b){
                 p_value = as.numeric(Res["b", "Pr(>F)"])))
   } else (return("null"))
 }
-
