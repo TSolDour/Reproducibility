@@ -91,8 +91,8 @@ This folder contains all the results: cleaned data, graphs, statistical outputs,
 Unlike the **Data** folder, whose contents are sacred, and the **R** folder, which requires careful tracking, the contents of **Results** have no intrinsic value since they can be reproduced identically and *ad libitum*. Therefore, there is no need to fear manipulating results, deleting them, moving them, etc.
 
 + **R_project**:
-Any research project that uses R as its programming language for analyses should be carried out within an **R_project**. Located at the root of the working directory, the R_project associated with your project allows you to use **relative paths** for all files contained and produced in your working directory. Thus, by sharing your project along with the associated *.Rproj* file, it will never be necessary to modify the paths used in the scripts, nor specifying specific working directory.
-If you are not already systematically working within R_projects, now is the time to start! A tutorial for creating R_projects is available [here] (https://thinkr.fr/debuter-avec-r-et-rstudio/#Les_projets_R_avec_RStudio). This way, you will no longer need to specify your working directory environment using the `setwd()` function, which relies on absolute paths that are only valid on your own computer.
+Any research project that uses R as its programming language for analyses should be carried out within an **R_project**. Located at the root of the working directory, the .Rproj file associated to your project allows you to use **relative paths** for all files contained and produced in your working directory. Thus, by sharing your project along with the associated *.Rproj* file, it will never be necessary to modify the paths used in the scripts, nor specifying specific working directory.
+If you are not already systematically working within R_projects, now is the time to start! A tutorial for creating R_projects is available [here](https://thinkr.fr/debuter-avec-r-et-rstudio/#Les_projets_R_avec_RStudio). This way, you will no longer need to specify your working directory environment using the `setwd()` function, which relies on absolute paths that are only valid on your own computer.
 
 ## **Additional elements**
 
@@ -105,7 +105,19 @@ The **README** file is intended to explain the project. It is generally the firs
 A **Docs** folder can optionally complement the working directory by containing, for example, documentation associated with specific packages.
 
 + **Report**:
-This folder may contain all the files related to the reporting of your project, i.e. working reports, presentations, manuscripts, images... If you do the reporting with Rmarkdown or Quarto (see section 6), having this folder within the Rproject working directory will facilitate the connection to your scripts and outputs.
+This folder may contain all the files related to the reporting of your project, i.e. working reports, presentations, manuscripts, images... If you do the reporting with Rmarkdown or Quarto (see section 6), having this folder within the R_project working directory is required to facilitate the connection to your scripts and outputs.
+
+
+::: {.callout-tip}
+## **Preserving paths in any situations**
+
+| Even if you work in a R_project properly structured and use only relative paths (i.e. `read.csv(Data/allo.csv)`), R markdown and Quarto will not find the root by themselves. Consequently, some inconsistencies will appear between the paths used in your scripts and the ones used by R markdown and Quarto. To avoid this, you should use the `here::here()` function.
+
+| `here::here()` forces R, R markdown and Quarto to search the path from the project's root. Concretely, `here()` goes up folders until finding a .Rproj file, a .git/ or any other element specific to the root. 
+
+| Therefore, rather specifying your path as `read.csv(Data/allo.csv)`, prefer to use `read.csv(here:here("Data", "Allo.csv"))`. By doing this, you will use relative paths in their most powerful form.
+:::
+
 
 # **Project implementation - the *targets* package**
 
@@ -515,6 +527,68 @@ Here is the Rmarkdown interest: you can insert **chunks**, that are spaces dedic
 
 |   What is very interesting with Rmarkdown and quarto is that they can be used in association with a *targets* project. It is very simple, you just have to install and load in the _*targets.R* script the *tarchetypes* package. Then, at the end of the list of targets, just add `tar_render(Name, path_to_the_Rmarkdown)` or `tar_quarto(Name, path_to_the_quarto)`. As for the other targets, use `tar_make()` to run it and your dynamic report will be automatically outputted. In your Rmarkdown or quarto document, you can point toward targets to directly include the outputs of your workflow in your report/article/book, etc. In particular to write scientific articles, it is powerful! A quarto example based on this reproducibility project is available here. Check the files [*Article.qmd*](https://github.com/TSolDour/Reproducibility/blob/master/Report/Article/Article.qmd) and [*Reproducibility_targets.R*](https://github.com/TSolDour/Reproducibility/blob/master/Reproducibility_targets.R) at the root of the project.
 
+
+# **Summary: common reproducibility anti-patterns (and how to avoid them)**
+
+Even with the best intentions, some common habits strongly undermine reproducibility.
+Below is a non-exhaustive list of frequent anti-patterns, along with recommended alternatives.
+
++ **Using `setwd()` in scripts**
+
+*Why it is a problem:*  
+Absolute paths are machine-specific and will break when the project is moved or shared.
+
+*Prefer:* 
+Work inside an RStudio project and rely exclusively on relative paths.
+
++ **Modifying raw data files**
+
+*Why it is a problem:* 
+Raw data are the foundation of the entire analysis. Any modification makes results unverifiable.
+
+*Prefer:*
+Treat raw data as read-only and perform all transformations through scripts.
+
++ **Copy-pasting results into Word or PowerPoint**
+
+*Why it is a problem:* 
+Manual transfer introduces errors and disconnects results from the code that produced them.
+
+*Prefer:*  
+Use R Markdown or Quarto to generate figures, tables, and text directly from the analysis.
+
++ **Running analyses interactively without scripts**
+
+*Why it is a problem:*  
+Point-and-click actions leave no trace and cannot be reproduced.
+
+*Prefer:* 
+Script every analytical step, even exploratory ones.
+
++ **Installing or updating packages without tracking versions**
+
+*Why it is a problem:*
+Results may change over time or across machines due to dependency updates.
+
+*Prefer:*
+Use `renv` to lock package versions and ensure a stable computational environment.
+
++ **Working without version control**
+
+*Why it is a problem:*  
+Changes are irreversible, undocumented, and difficult to share or review.
+
+*Prefer:*  
+Use Git to track all modifications to scripts, documentation, and configuration files.
+
+---
+
+**Key idea**
+
+Reproducibility is not about perfection or rigidity.  
+It is about making your work **understandable, inspectable, and reusable** — by yourself and by others.
+
+
 # **The reproducibility: a way to find help!**
 
 |   To produce analyses and scripts easily reproducible is also the best way to find help when needed. Whether you ask a colleague, a professor or even an artificial intelligence, you have more chance to find a satisfying answer if you give understandable and usable piece of code - a "*reprex*": REPRoducible EXample.
@@ -683,79 +757,3 @@ df_OK %>%
 + `venue = c("gh", "so", "ds", "r", "rtf", "html")` must be set based on the destination of your example. From left to right, the values correspond to GitHub, stackOverflow, Rstudio community, "R-friendly" output, Rich-Text Format, HTML document.
 
 + `si = FALSE` by default, but if you specify `TRUE`, then your session info, (e.g. package versions) are included in the reprex, which may be required in some cases.
-
-# **Common reproducibility anti-patterns (and how to avoid them)**
-
-::: {.callout-caution}
-## **Common reproducibility anti-patterns (and how to avoid them)**
-
-Even with the best intentions, some common habits strongly undermine reproducibility.
-Below is a non-exhaustive list of frequent anti-patterns, along with recommended alternatives.
-
-
-+ **Using `setwd()` in scripts**
-*Why it is a problem:*  
-Absolute paths are machine-specific and will break when the project is moved or shared.
-
-*Prefer:* 
-Work inside an RStudio project and rely exclusively on relative paths.
-
-
-**Modifying raw data files**
-*Why it is a problem:* 
-Raw data are the foundation of the entire analysis. Any modification makes results unverifiable.
-
-*Prefer:*
-Treat raw data as read-only and perform all transformations through scripts.
-
-
-+ **Copy-pasting results into Word or PowerPoint**
-
-*Why it is a problem:* 
-Manual transfer introduces errors and disconnects results from the code that produced them.
-
-*Prefer:*  
-Use R Markdown or Quarto to generate figures, tables, and text directly from the analysis.
-
-
-+ **Running analyses interactively without scripts**
-
-*Why it is a problem:*  
-Point-and-click actions leave no trace and cannot be reproduced.
-
-*Prefer:* 
-Script every analytical step, even exploratory ones.
-
-
-+ **Installing or updating packages without tracking versions**
-
-*Why it is a problem:*
-Results may change over time or across machines due to dependency updates.
-
-*Prefer:*
-Use `renv` to lock package versions and ensure a stable computational environment.
-
-
-+ **Working without version control**
-
-*Why it is a problem:*  
-Changes are irreversible, undocumented, and difficult to share or review.
-
-*Prefer:*  
-Use Git to track all modifications to scripts, documentation, and configuration files.
-
-
-+ **Sharing code without data examples**
-
-*Why it is a problem:*  
-Others cannot reproduce or debug the issue without understanding the data structure.
-
-*Prefer:*  
-Provide a minimal, self-contained reproducible example (reprex), including sample data.
-
----
-
-**Key idea**
-Reproducibility is not about perfection or rigidity.  
-It is about making your work **understandable, inspectable, and reusable** — by yourself and by others.
-:::

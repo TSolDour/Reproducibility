@@ -12,7 +12,8 @@ csl: ieee.csl
 ---
 
 
-```{r setup, include=FALSE}
+```{r setup}
+#| include: FALSE
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -23,7 +24,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introduction
 
-|  Cephalopods are becoming promising model systems in ecotoxicology, for biomonitoring [@Ajala2022] as well as experimental studies [@Penicaud2017;@Garca-Flores2025]. They are also a meal loved by Iberian people: Portuguese and Spanish. For instance, one of the best way to cook octopus is the *pulpo a la gallega*.
+|  Cephalopods are becoming promising model systems in ecotoxicology, for biomonitoring [@Ajala2022] as well as experimental studies [@Penicaud2017;@Garca-Flores2025]. They are also a meal really loved by Iberian people: Portuguese and Spanish. For instance, one of the best way to cook octopus is the *pulpo a la gallega*.
 
 <br>
 
@@ -31,22 +32,30 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Description of the biological material
 
-| The best octopuses are found directly on the dock of the fishing harbours. Ask to fishers if they cought some, but do it kindly because they are sensible guys.
+| The best octopuses are found directly on the dock of fishing harbours. Ask to fishers if they cought some, but do it kindly because they are sensible guys.
 
 <br>
 
 ## Cooking recipe
 
-| Too long to details it here, sorry... Instead, focus on bivalves from Sine Saloum.
+| Too long to details it here, sorry... Instead, focus on bivalves from Sine Saloum, easier to cook.
 
 <br>
 
 # Results
 
-
 | The length of individuals found in different stations are displayed in the Figure 1.
 
-```{r, Figure1, fig.cap="Figure 1: What a beautiful plot!", echo=FALSE, warning=FALSE, message=FALSE, dpi=500, fig.width=6, fig.height=4, out.height="7in", out.width="8in"}
+```{r}
+#| label: Figure1
+#| fig-cap: "Figure 1: What a beautiful plot!"
+#| fig-width: 6
+#| fig-height: 4
+#| fig-dpi: 500
+#| echo: false
+#| warning: false
+#| message: false
+
 library(targets)
 tar_read(Plot)
 ```
@@ -57,7 +66,13 @@ tar_read(Plot)
 
 | Moreover, if we want, we can use the packages *flextable* and *ftExtra* to include the data (first 10 rows) as a beautiful table:
 
-```{r, Table1, echo=FALSE, warning=FALSE, message=FALSE}
+```{r}
+#| label: Table1
+#| echo: false
+#| warning: false
+#| message: false
+
+
 library(knitr)
 library(flextable)
 library(ftExtra)
@@ -75,6 +90,8 @@ flextable(table) %>%
   set_table_properties(layout = "autofit", width=1) %>%
   set_caption("Table 1: Sequencing statistics for newly hatched juveniles. GeT-PlaGe sample code is used for the labelling of reads in the European Nucleotide Archive repository. R1 GC% and R2 GC% are percent GC content on the forward and reverse reads, respectively.")
 ```
+
+<!-- And finally, we can include comments within the doc. The comments do not appear in the rendered document. -->
 
 \newpage
 # References
