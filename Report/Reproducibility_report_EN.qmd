@@ -14,12 +14,13 @@ format:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+\newpage
 |   Foreword: You will find in the following the presentation of diverse tools to enhance the reproducibility of your analytical work carried out with R, using the IDE RStudio. Consequently, you need to have both installed on your machine to properly follow and experiment the content. To do so, go to the [Posit](https://posit.co/download/rstudio-desktop/) website and (i) install R (choose the version whether you have a windows or macOS system), (ii) install RStudio (choose the version whether you have a windows or macOS system).
 
 
 # **Introduction**
 
-|   Modern science requires for each experiment to be **replicable**, i.e. the capacity to “*obtain\[\] consistent results across studies aimed at answering the same scientific question, each of which has obtained its own data*”. (National Academies of Sciences, Engineering and Medecine, 2019 dans [Hicks, 2023](https://www.tandfonline.com/doi/epdf/10.1080/08989621.2021.1962713?needAccess=true)). This acception of replicability refers to the assumption of **universality of science**. In other words, if we demonstrate the neurotoxicity of mercury on *Sepia officinalis* on 1 January 2026 in La Rochelle, this *must be true* in Porto or Namur 10 years later. Consequently, replicability relies on the **qualitative consistency** of scientific results, as well as rigorous sharing of experimental set up.
+|   Modern science requires for each experiment to be **replicable**, i.e. the capacity to “*obtain\[\] consistent results across studies aimed at answering the same scientific question, each of which has obtained its own data*”. (National Academies of Sciences, Engineering and Medecine, 2019 dans [Hicks, 2023](https://www.tandfonline.com/doi/epdf/10.1080/08989621.2021.1962713?needAccess=true)). This acception of replicability refers to the assumption of **universality of science**. In other words, if we demonstrate the neurotoxicity of mercury on *Sepia officinalis* on 12 January 2026 in La Rochelle, this *must be true* in Porto or Namur 10 years later. Consequently, replicability relies on the **qualitative consistency** of scientific results, as well as rigorous sharing of experimental set up.
 
 |   Since the advent of computers and numerical analyses, the notion of **reproducibility** has been added to that of **replicability**. A synonym of computational reproducibility, **reproducibility** refers to the ability to "*obtain the same results from the same data by using the same computational steps, the same code, and the same analytical conditions*" (National Academies of Sciences, Engineering and Medecine, 2019 dans [Hicks, 2023](https://www.tandfonline.com/doi/epdf/10.1080/08989621.2021.1962713?needAccess=true)). It concerns the **quantitative consistency** of results and should be considered an **indispensable tool** for peer-review of outputs resulting from a research project (reports, articles, expert assessments, etc.).
 
@@ -406,17 +407,19 @@ git push --set-upstream origin master
 |   Now, you have to now the architecture of Git and GitHub, and some basic functions to start using it properly. A basic routine use of Git and GitHub is displayed in the following scheme:
 ![](Images/Image6.jpg)
 
-|   Considering **the last version of your project is on GitHub**, start your working day by navigate to your local project's root using `cd PATH`. Then use `git pull` to load the last version of the project from GitHub to your local machine. You now have your up-to-date project in the *master* branch of Git.
+|   Considering **the last version of your project is on GitHub**, start your working day by navigating to your local project's root using `cd PATH`. Then use `git pull` to load the last version of the project from GitHub to your local machine. You now have your up-to-date project in the *master* branch of Git.
 
 |   To secure your work, I advise you to immediately create a parallel branch on which you can do all the modifications you want before merging them to the main branch. Always give **explicit names** to the different branches you will create. Here, for instance: `git branch working`. Once the branch exists, you have to position yourself on it using `git checkout working`. If you are lost and want to know on which branch you are, use `git branch`.
 
 |   Ok, now you are on the parallel branch (*working*), which contains the same version of the project as the main branch (*master*). You can start to work!
 
-|   For instance, you can create the README.txt file at the root of the project or modify it if it already exists. This modification exists only in your *working* branch but it is not already tracked by Git. You need to:
+|   For instance, you can create the README.txt file at the root of the project or modify it if it already exists. As long as Git doesn't track the file, this modification is on your computer. You have to run
 
-+ Ask Git to track the modification: `git add FileName`;
++ `git add FileNAme` to ask Git to track the modification
 
-+ Ask Git to capture the modification. We talk about **commit**, which is a kind of snapshot of the project. To make a commit, you need to add a comment so you can easily know what was committed if you go back to it later. To make it as clear as possible, it is advised to commit consistent set of objects independantly. The function is: `git commit Filename -m "Your message"`.
++`git commit FileName -m "A message to describe the commit`, to ask Git to capture the modification. The **commit** is a kind of snapshot of the project. A comment is mendatory to perform a commit, so you can easily know what was committed if you go back to it later. It is advised to commit consistent set of objects independantly.
+
+| Now, the modification belongs to your *working* branch only. If you change to the *master* branch, the README.txt file disappears. Now, go back to the *working* branch: the README.txt file reappears! It is magic... 
 
 |   **Remark :** If you are lost, you can check the Git status of the project with: `git status`.
 
@@ -424,7 +427,7 @@ git push --set-upstream origin master
 
 |   At the end of the work session, you can transfer the last version toward GitHub. Two possibilities:
 
-+ (i) You are satisfied of the work, confident in the modifications, and nobody needs to validate them. Thus, go to your *master* branch: `git branch master`, then merge the *working* branch to the *master*: `git merge working`. Now run `git push` to make the transfer toward GitHub.
++ (i) You are satisfied of the work, confident in the modifications, and nobody needs to validate them. Thus, go to your *master* branch: `git checkout master`, then merge the *working* branch to the *master*: `git merge working`. Now run `git push` to make the transfer toward GitHub.
 
 + (ii) Your modifications must be checked by a colleague before integrating them to the project. Directly push the *working* branch to GitHub using `git push` directly from that branch.
 
@@ -434,7 +437,7 @@ Now, refreshing the GitHub page, you can see the new version of the project.
 
 ![](Images/Image9.jpg){width=75%}
 
-|   Each commit has an identification number - the **hash**, an **author**, a **creation data** and a **message**. Consequently, you can find any version of the project et go back to it if necessary **without modifying nor deleting the subsequent version**. This is done with `git checkout CommitHash`. You can then see the related project version, make some modifications or even create a new branch from this particular commit (`git checkout -b NewBranch CommitHash` or `git switch -c <NewBranch>` if you are already on the commit) to start some parallel work you can merge later.
+|   Each commit has an identification number - the **hash**, an **author**, a **creation data** and a **message**. Consequently, you can find any version of the project and go back to it if necessary **without modifying nor deleting the subsequent version**. This is done with `git checkout CommitHash`. You can then see the related project version, make some modifications or even create a new branch from this particular commit (`git checkout -b NewBranch CommitHash` or `git switch -c <NewBranch>` if you are already on the commit) to start some parallel work you can merge later.
 
 |   The use of Git and GitHub can be much more subtle and complex than what is present above. To learn more on Git function and improve your versioning skills, go [**there**](https://git-scm.com/book/en/v2)!
 
