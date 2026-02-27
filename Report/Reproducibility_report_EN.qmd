@@ -415,9 +415,9 @@ git push --set-upstream origin master
 
 |   For instance, you can create the README.txt file at the root of the project or modify it if it already exists. As long as Git doesn't track the file, this modification is on your computer. You have to run
 
-+ `git add FileNAme` to ask Git to track the modification
++ `git add FileNAme` to ask Git to track the modification. If you run `git status`, the tracked files are presented in green.
 
-+`git commit FileName -m "A message to describe the commit`, to ask Git to capture the modification. The **commit** is a kind of snapshot of the project. A comment is mendatory to perform a commit, so you can easily know what was committed if you go back to it later. It is advised to commit consistent set of objects independantly.
++`git commit -m "A message to describe the commit`, to ask Git to capture the modification. The **commit** is a kind of snapshot of the project. A comment is mendatory to perform a commit, so you can easily know what was committed if you go back to it later. It is advised to commit consistent set of objects independantly.
 
 | Now, the modification belongs to your *working* branch only. If you change to the *master* branch, the README.txt file disappears. Now, go back to the *working* branch: the README.txt file reappears! It is magic... 
 
