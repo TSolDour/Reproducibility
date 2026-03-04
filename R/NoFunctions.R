@@ -5,8 +5,6 @@
 #
 ##########################################################
 
-# Baudelaire était un mec bien.
-
 library(readr)
 library(dplyr)
 library(ggplot2)
