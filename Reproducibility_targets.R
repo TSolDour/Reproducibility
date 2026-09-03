@@ -3,14 +3,16 @@
 # Then follow the manual to check and run the pipeline:
 #   https://books.ropensci.org/targets/walkthrough.html#inspect-the-pipeline
 rm(list = ls())
+
 # Load packages required to define the pipeline:
 library(targets)
 library(tarchetypes)
 library(visNetwork) # Load other packages as needed.
+library(quarto)
 
 # Set target options:
 tar_option_set(
-  packages = c("readr", "dplyr", "ggplot2", "tibble", "car") # Packages that your targets need for their tasks.
+  packages = c("readr", "dplyr", "ggplot2", "tibble", "car", "multcompView") # Packages that your targets need for their tasks.
   # format = "qs", # Optionally set the default storage format. qs is fast.
   #
   # Pipelines that take a long time to run may benefit from
@@ -47,18 +49,20 @@ tar_option_set(
 
 # Run the R scripts in the R/ folder with your custom functions:
 tar_source("R/01_Load_gasar.R")
-tar_source("R/02_Res_gasar.R")
-tar_source("R/03_Plot_length_gasar.R")
-tar_source("R/04_AnovaTest_gasar.R")
+tar_source("R/02_AnovaTest_gasar.R")
+tar_source("R/03_Res_gasar.R")
+tar_source("R/04_Plot_length_gasar.R")
 
 # Replace the target list below with your own:
 list(
-  tar_target(file, "Data/Allo.csv", format="file"),
-  tar_target(data, load_gasar(file)), # rds is the default format. see https://docs.ropensci.org/targets/reference/tar_target.html#storage-formats for other formats
-  tar_target(Resume, Res_gasar(data)),
-  tar_target(Plot, Plot_length(Resume)),
+  tar_target(file, here::here("data", "Allo.tsv"), format="file"),
+  tar_target(data, load_gasar(file)),
   tar_target(Anova_gasar_Length_Station, AnovaTest(data, data$Longueurs, data$Station)),
-  tar_quarto(Article, path='Report/Article/Article.qmd', quiet=FALSE))
+  tar_target(Kruskal_gasar_length_Station, KruskalTest(data, data$Longueurs, data$Station)),
+  tar_target(Resume, Res_gasar(data)),
+  tar_target(Plot, Plot_length(data, resume=Resume, letters=Kruskal_gasar_length_Station)),
+  tar_target(ExportPlot, PlotExport("results/plots/1-gasarPlot.png", Plot, W=8, H=5, U="in")),
+  tar_quarto(Article, path='report/article/Article.qmd', quiet=FALSE))
 
 # Sys.setenv(TAR_PROJECT = "Reproducibility")
 # tar_manifest(fields = command) # to check for mistakes
