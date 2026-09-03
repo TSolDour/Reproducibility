@@ -1,0 +1,47 @@
+---
+title: "Report Example"
+author: "Thomas Sol Dourdin"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+# First title
+## Second title
+
+| Now I can write some texte before integrating **code**:
+```{r}
+dim(iris)
+```
+
+| Depending on the specified *options*, we can see the code without the result...
+```{r, eval=FALSE}
+dim(iris)
+```
+
+
+| ...or we can see the result without the code.
+```{r, echo=FALSE}
+dim(iris)
+```
+
+| Something very useful is that we can also integrate inline code, for instance: `r 2+2`.
+
+| Now, if you have an executable script (creating object, displaying nothing) from which you want to make a report. You have to specify:
+
+```{r setup, warning=FALSE, message=FALSE}
+library(here)
+source(here("R", "NoFunctions.R"))
+```
+
+| Doing that, all the objects produced by the referenced script are available to Rmarkdown. 
+| Consequently, we can display the plots directly from the original script
+
+```{r}
+p
+```
+
+```{r, echo=FALSE}
+pvalue <- Res[["Pr(>F)"]][1]
+```
+
+| But we can also use the inline code to give some statistics or informations from the script, so it will change automatically if you modify the script. For instance, we ran an ANOVA, we can automatically report the p-value (`r pvalue`). Thus, if you change something in the data and re-run the ANOVA, the p-value will be automatically updated in your report.
