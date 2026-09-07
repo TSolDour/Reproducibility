@@ -1,8 +1,8 @@
-# Projet : gasar
+# Projet : reproducibility
 
 **Auteur :** Thomas Sol Dourdin
 
-"Reproducibility" est un projet reproductible type, mis au point pour préparer un café data LIENSs dédié à la reproductibilité.
+"reproducibility" est un projet reproductible type, mis au point pour préparer un café data LIENSs dédié à la reproductibilité.
 
 ## Données
 
@@ -36,7 +36,7 @@ Pour éviter tout problème lié à la version de R, de Quarto, ou des packages 
 ### Option 1 — Récupérer l'image déjà construite (recommandé)
 
 ```bash
-docker pull ghcr.io/TSolDour/reproducibility:1.0
+docker pull ghcr.io/tsoldour/reproducibility:1.0
 ```
 
 Cette image est un instantané figé de l'environnement original : elle garantit un résultat identique, même si les dépôts externes (CRAN, PPM, Quarto) venaient à évoluer avec le temps.
@@ -45,8 +45,8 @@ Cette image est un instantané figé de l'environnement original : elle garantit
 
 ```bash
 git clone https://github.com/TSolDour/reproducibility.git
-cd Reproducibility
-docker build -t Reproducibility .
+cd reproducibility
+docker build -t reproducibility .
 ```
 
 Cette option permet d'inspecter exactement comment l'environnement est construit (voir le `Dockerfile`), au prix d'un temps de build plus long (installation de R, compilation des packages, téléchargement de Quarto).
@@ -59,10 +59,10 @@ Le pipeline (`targets::tar_make()`) s'exécute automatiquement au démarrage du 
 docker run --rm \
   -v $(pwd)/dockerOutput/results/:/project/results \
   -v $(pwd)/dockerOutput/report/article:/project/report/article \
-  Reproducibility
+  reproducibility
 ```
 
-*(Remplacez `Reproducibility` par `ghcr.io/TSolDour/Reproducibility:1.0` si vous utilisez l'image publiée.)*
+*(Remplacez `reproducibility` par `ghcr.io/tsoldour/reproducibility:1.0` si vous utilisez l'image publiée.)*
 
 À la fin de l'exécution, vous trouverez sur votre machine :
 
