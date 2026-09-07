@@ -18,6 +18,10 @@ RUN apt-get update && apt-get install -y \
     libcairo2-dev \
     libssl-dev \
     libxml2-dev \
+    libfontconfig1-dev \
+    libharfbuzz-dev \
+    libfribidi-dev \
+    libglpk-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Installer le Quarto CLI nécessaire pour faire tourner le package quarto
@@ -45,7 +49,7 @@ RUN R -e "renv::restore()"
 COPY . .
 
 # Spécifier où targets doit trouver son script
-ENV TAR_PROJECT=Reproducibility
+ENV TAR_PROJECT=reproducibility
 
 # Exécuter le pipeline targets dans l'image
 RUN R -e "targets::tar_make()"

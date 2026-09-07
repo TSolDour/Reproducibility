@@ -64,7 +64,7 @@ list(
   tar_target(ExportPlot, PlotExport("results/plots/1-gasarPlot.png", Plot, W=8, H=5, U="in")),
   tar_quarto(Article, path='report/article/Article.qmd', quiet=FALSE))
 
-# Sys.setenv(TAR_PROJECT = "Reproducibility")
+# Sys.setenv(TAR_PROJECT = "reproducibility")
 # tar_manifest(fields = command) # to check for mistakes
 # tar_visnetwork() # to check for the pipeline architecture
 # tar_make() # To run the pipeline

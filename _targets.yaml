@@ -1,4 +1,4 @@
-Reproducibility:
-  script: Reproducibility_targets.R
-  store: Results
+reproducibility:
+  script: reproducibility_targets.R
+  store: results
 
