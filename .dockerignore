@@ -1,0 +1,9 @@
+.git
+.gitignore
+.Rhistory
+.Rproj.user
+.DS_store
+__MACOSX
+renv/library
+renv/staging
+results
